@@ -1,0 +1,60 @@
+{
+  "name": "rubya",
+  "version": "0.0.1",
+  "description": "Project destined to create json schema of visual form in vue.js",
+  "main": "dist/rubya.umd.js",
+  "module": "dist/rubya.esm.js",
+  "unpkg": "dist/rubya.min.js",
+  "browser": {
+    "./sfc": "src/index.vue"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config rollup.config.js --format umd --file dist/rubya.umd.js",
+    "build:es": "rollup --config rollup.config.js --format es --file dist/rubya.esm.js",
+    "build:unpkg": "rollup --config rollup.config.js --format iife --file dist/rubya.min.js",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e",
+    "lint": "vue-cli-service lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bertoni/rubya"
+  },
+  "bugs": {
+    "url": "https://github.com/bertoni/rubya/issues"
+  },
+  "author": "Arnaldo Bertoni <arnaldo.bertoni@ufabc.edu.br>",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "vue",
+    "json",
+    "schema",
+    "jsonschema"
+  ],
+  "dependencies": {
+    "core-js": "^3.4.4",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-e2e-nightwatch": "^4.1.0",
+    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-plugin-unit-jest": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-eslint": "^10.0.3",
+    "chromedriver": "^78.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "geckodriver": "^1.19.1",
+    "rollup": "^1.29.0",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-vue": "^5.1.5",
+    "vue-template-compiler": "^2.6.10"
+  }
+}
