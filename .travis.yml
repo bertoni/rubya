@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - 11
+script:
+  - npm run lint
+  - npm run test:unit
+before_deploy:
+  - npm run build
+deploy:
+  provider: npm
+  email: "$NPM_EMAIL"
+  api_key: "$NPM_API_TOKEN"
+  skip_cleanup: true
+  on:
+    branch: master
+after_success:
+  - npm install -g codecov
+  - codecov -f test/unit/coverage/lcov.info
+  on:
+    branch: master

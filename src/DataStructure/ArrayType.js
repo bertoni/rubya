@@ -3,7 +3,7 @@ import BaseType from './BaseType.js'
 function ArrayType (structure, name) {
   BaseType.call(this, structure, name)
   this.type = 'array'
-  this.items = []
+  this.items = structure.items || []
   this.additionalItems = structure.additionalItems || false
   this.uniqueItems = structure.uniqueItems || false
   this.minItems = structure.minItems || null

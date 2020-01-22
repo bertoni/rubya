@@ -66,7 +66,7 @@ export default {
     }
   },
   mounted () {
-    this.internalData = {...this.originalObject}
+    this.internalData = { ...this.originalObject }
     this.requiredChildren = this.internalData.required.join(',')
   }
 }

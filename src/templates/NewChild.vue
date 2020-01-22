@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     changeType (type) {
-      this.internalData = DataStructureFactory.create({'type': type}, null)
+      this.internalData = DataStructureFactory.create({ 'type': type }, null)
       this.type = type
     },
     save (newData) {

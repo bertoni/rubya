@@ -2,6 +2,8 @@
 
 > Project destined to create json schema of visual form in vue.js
 
+[![Build Status](https://travis-ci.org/bertoni/rubya.svg?branch=master)](https://travis-ci.org/bertoni/rubya)
+
 ![Rubya image S2](assets/rubya.jpg "Rubya image S2")
 
 *A tribute for my Pug Rubya*
