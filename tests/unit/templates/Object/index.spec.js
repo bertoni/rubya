@@ -125,6 +125,8 @@ describe('ObjectTemplate.vue', () => {
     expect(wrapper.vm.internalData.minProperties).toBe(newStructure.minProperties)
     expect(wrapper.vm.internalData.maxProperties).toBe(newStructure.maxProperties)
     expect(wrapper.vm.internalData.name).toBe(newStructure.name)
+    expect(typeof wrapper.emitted()).toBe('object')
+    expect(typeof wrapper.emitted().change).toBe('object')
   })
 
   it('should remove item in removeChild method', () => {

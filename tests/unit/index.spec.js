@@ -22,6 +22,10 @@ describe('index.vue', () => {
     expect(typeof Rubya.methods.removeChild).toBe('function')
   })
 
+  it('should have a childUpdated method', () => {
+    expect(typeof Rubya.methods.childUpdated).toBe('function')
+  })
+
   it('should renders correctly component', () => {
     wrapper = shallowMount(Rubya, {
       propsData: {
@@ -71,5 +75,28 @@ describe('index.vue', () => {
     expect(wrapper.vm.tree.properties.length).toBe(1)
     wrapper.vm.removeChild()
     expect(wrapper.vm.tree.properties.length).toBe(0)
+  })
+
+  it('should change tree state in childUpdated method', () => {
+    wrapper = shallowMount(Rubya, {
+      propsData: {}
+    })
+    let objectType = new ObjectType({
+      title: 'a title',
+      id: '$123',
+      description: 'Some description',
+      required: [],
+      additionalProperties: true,
+      minProperties: 1,
+      maxProperties: 10
+    }, 'some_object')
+    objectType.properties.push(new BooleanType({
+      title: 'New Boolean field',
+      id: '#newfield',
+      description: 'Some new description'
+    }))
+    expect(wrapper.vm.tree.properties.length).toBe(0)
+    wrapper.vm.childUpdated(objectType)
+    expect(wrapper.vm.tree.properties.length).toBe(1)
   })
 })

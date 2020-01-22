@@ -85,7 +85,7 @@ export default {
     }
   },
   mounted () {
-    this.internalData = {...this.originalObject}
+    this.internalData = { ...this.originalObject }
   }
 }
 </script>

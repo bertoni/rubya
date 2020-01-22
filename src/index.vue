@@ -4,6 +4,7 @@
     :originalObject="tree"
     :allowChangeName="false"
     @removeMe="removeChild"
+    @change="childUpdated"
     />
 </template>
 
@@ -40,6 +41,9 @@ export default {
   methods: {
     getJsonSchema () {
       this.$emit('updatedSchema', this.tree.toJson())
+    },
+    childUpdated (objectType) {
+      this.tree = objectType
     },
     generateTreeFromSchema (schema) {
       this.tree = DataStructureFactory.create(schema)

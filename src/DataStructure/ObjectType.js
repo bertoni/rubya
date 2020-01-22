@@ -3,7 +3,7 @@ import BaseType from './BaseType.js'
 function ObjectType (structure, name) {
   BaseType.call(this, structure, name)
   this.type = 'object'
-  this.properties = []
+  this.properties = Array.isArray(structure.properties) ? structure.properties : []
   this.required = structure.required || []
   this.additionalProperties = structure.additionalProperties || false
   this.minProperties = structure.minProperties || null

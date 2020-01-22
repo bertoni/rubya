@@ -12,6 +12,7 @@ DataStructureFactory.create = function (structure, name) {
   if (structure.type === 'object') {
     let objectType = new ObjectType(structure, name)
     if (structure.properties && structure.properties instanceof Object && Object.keys(structure.properties).length) {
+      objectType.properties = []
       for (let idx in structure.properties) {
         let child = this.create(structure.properties[idx], idx)
         if (!(child instanceof Error)) {
