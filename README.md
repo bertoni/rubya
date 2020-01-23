@@ -3,6 +3,7 @@
 > Project destined to create json schema of visual form in vue.js
 
 [![Build Status](https://travis-ci.org/bertoni/rubya.svg?branch=master)](https://travis-ci.org/bertoni/rubya)
+[![codecov](https://codecov.io/gh/bertoni/rubya/branch/master/graph/badge.svg)](https://codecov.io/gh/bertoni/rubya)
 
 ![Rubya image S2](assets/rubya.jpg "Rubya image S2")
 
