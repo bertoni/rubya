@@ -106,6 +106,8 @@ updatedSchema (schema) {
 ## How works
 ![Rubya screen](assets/screen.png "Rubya screen")
 
+Use can use the [demo page](https://bertoni.github.io/rubya/index.html) to see how it works.
+
 Every field has two options:
 * Edit: enable you change the field properties
 * Remove: enable you to remove this field
