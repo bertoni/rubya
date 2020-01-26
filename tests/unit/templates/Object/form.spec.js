@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import ObjectType from '@/DataStructure/ObjectType.js'
+import BooleanType from '@/DataStructure/BooleanType.js'
 import ObjectForm from '@/templates/Object/form.vue'
 
 let wrapper
@@ -36,7 +37,8 @@ describe('ObjectForm.vue', () => {
     })
     expect(wrapper.name()).toBe('ObjectForm')
     expect(wrapper.vm.fieldsWithError.name).toBeFalsy()
-    expect(wrapper.vm.requiredChildren).toBe('')
+    expect(wrapper.vm.requiredChildren).toStrictEqual([])
+    expect(wrapper.vm.children).toStrictEqual([])
     expect(wrapper.vm.internalData.title).toBe(structure.title)
     expect(wrapper.vm.internalData.id).toBe(structure.id)
     expect(wrapper.vm.internalData.description).toBe(structure.description)
@@ -55,7 +57,8 @@ describe('ObjectForm.vue', () => {
     })
     expect(wrapper.name()).toBe('ObjectForm')
     expect(wrapper.vm.fieldsWithError.name).toBeFalsy()
-    expect(wrapper.vm.requiredChildren).toBe('')
+    expect(wrapper.vm.requiredChildren).toStrictEqual([])
+    expect(wrapper.vm.children).toStrictEqual([])
     expect(wrapper.vm.internalData.title).toBe(structure.title)
     expect(wrapper.vm.internalData.id).toBe(structure.id)
     expect(wrapper.vm.internalData.description).toBe(structure.description)
@@ -111,13 +114,31 @@ describe('ObjectForm.vue', () => {
   })
 
   it('should $emit change in save method with fields complete and required fields', () => {
+    let boolean01Structure = {
+      name: 'foo',
+      title: 'New Boolean field',
+      id: '#newfield',
+      description: 'Some new description'
+    }
+    let boolean01 = new BooleanType(boolean01Structure, boolean01Structure.name)
+    let boolean02Structure = {
+      name: 'baa',
+      title: 'New Boolean field',
+      id: '#newfield',
+      description: 'Some new description'
+    }
+    let boolean02 = new BooleanType(boolean02Structure, boolean02Structure.name)
+    let objectType = new ObjectType(structure, name)
+    objectType.properties.push(boolean01)
+    objectType.properties.push(boolean02)
+
     wrapper = shallowMount(ObjectForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: objectType
       }
     })
-    wrapper.vm.requiredChildren = 'foo,baa'
+    wrapper.vm.requiredChildren = ['foo', 'baa']
     wrapper.vm.save()
     expect(typeof wrapper.emitted()).toBe('object')
     expect(typeof wrapper.emitted().change).toBe('object')

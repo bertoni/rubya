@@ -2,17 +2,45 @@
   <div class="form-template">
     <h3>Object</h3>
     <form class="form-object" @submit.prevent="save">
-      <input v-if="allowChangeName" type="text" name="name" v-model="internalData.name" placeholder="Name" :class="(fieldsWithError.name ? 'error' : '')" />
-      <textarea v-model="internalData.description" placeholder="Description"></textarea>
-      <input type="text" name="identification" v-model="internalData.id" placeholder="Identification" />
-      <input type="text" name="title" v-model="internalData.title" placeholder="Title" />
-      <select v-model="internalData.additionalProperties">
-        <option value="true">Yes</option>
-        <option value="false">No</option>
-      </select>
-      <input type="number" v-model="internalData.minProperties" placeholder="Minimum properties" />
-      <input type="number" v-model="internalData.maxProperties" placeholder="Maximum length" />
-      <textarea v-model="requiredChildren" placeholder="Required children"></textarea>
+      <fieldset v-if="allowChangeName">
+        <label for="name" class="fieldplaceholder">Name</label>
+        <input type="text" name="name" id="name" v-model="internalData.name" :class="(fieldsWithError.name ? 'error' : '')" />
+      </fieldset>
+      <fieldset>
+        <label for="description" class="fieldplaceholder">Description</label>
+        <textarea v-model="internalData.description" name="description" id="description"></textarea>
+      </fieldset>
+      <fieldset>
+        <label for="identification" class="fieldplaceholder">Identification</label>
+        <input type="text" name="identification" id="identification" v-model="internalData.id" />
+      </fieldset>
+      <fieldset>
+        <label for="title" class="fieldplaceholder">Title</label>
+        <input type="text" name="title" id="title" v-model="internalData.title" />
+      </fieldset>
+      <fieldset>
+        <label for="additionalProperties" class="fieldplaceholder">Allow additional properties</label>
+        <select v-model="internalData.additionalProperties" name="additionalProperties" id="additionalProperties">
+          <option :value="true">Yes</option>
+          <option :value="false">No</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <label for="minProperties" class="fieldplaceholder">Minimum Properties</label>
+        <input type="number" name="minProperties" id="minProperties" v-model="internalData.minProperties" />
+      </fieldset>
+      <fieldset>
+        <label for="maxProperties" class="fieldplaceholder">Maximum Properties</label>
+        <input type="number" name="maxProperties" id="maxProperties" v-model="internalData.maxProperties" />
+      </fieldset>
+      <fieldset v-if="children.length">
+        <label class="fieldplaceholder">Required Children: </label>
+        <div class="options-group">
+          <label v-for="(child, key) in children" :key="'child' + key" class="option">
+            <input type="checkbox" v-model="requiredChildren" :value="child" /> {{ child }}
+          </label>
+        </div>
+      </fieldset>
     </form>
     <div class="control-form">
       <button class="save" @click.prevent="save">save</button>
@@ -42,7 +70,8 @@ export default {
         name: false
       },
       internalData: {},
-      requiredChildren: ''
+      children: [],
+      requiredChildren: []
     }
   },
   methods: {
@@ -55,7 +84,7 @@ export default {
         return false
       }
       if (this.requiredChildren.length) {
-        this.internalData.required = this.requiredChildren.split(',')
+        this.internalData.required = this.requiredChildren
       } else {
         this.internalData.required = []
       }
@@ -67,7 +96,8 @@ export default {
   },
   mounted () {
     this.internalData = { ...this.originalObject }
-    this.requiredChildren = this.internalData.required.join(',')
+    this.requiredChildren = this.internalData.required
+    this.children = this.internalData.properties.map(child => child.name)
   }
 }
 </script>

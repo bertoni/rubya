@@ -2,20 +2,44 @@
   <div class="form-template">
     <h3>Array</h3>
     <form class="form-object" @submit.prevent="save">
-      <input v-if="allowChangeName" type="text" name="name" v-model="internalData.name" placeholder="Name" :class="(fieldsWithError.name ? 'error' : '')" />
-      <textarea v-model="internalData.description" placeholder="Description"></textarea>
-      <input type="text" name="identification" v-model="internalData.id" placeholder="Identification" />
-      <input type="text" name="title" v-model="internalData.title" placeholder="Title" />
-      <select v-model="internalData.additionalItems">
-        <option value="true">Yes</option>
-        <option value="false">No</option>
-      </select>
-      <select v-model="internalData.uniqueItems">
-        <option value="true">Yes</option>
-        <option value="false">No</option>
-      </select>
-      <input type="number" v-model="internalData.minItems" placeholder="Minimum items" />
-      <input type="number" v-model="internalData.maxItems" placeholder="Maximum items" />
+      <fieldset v-if="allowChangeName">
+        <label for="name" class="fieldplaceholder">Name</label>
+        <input type="text" name="name" id="name" v-model="internalData.name" :class="(fieldsWithError.name ? 'error' : '')" />
+      </fieldset>
+      <fieldset>
+        <label for="description" class="fieldplaceholder">Description</label>
+        <textarea name="description" id="description" v-model="internalData.description"></textarea>
+      </fieldset>
+      <fieldset>
+        <label for="id" class="fieldplaceholder">Identification</label>
+        <input type="text" name="id" id="id" v-model="internalData.id" />
+      </fieldset>
+      <fieldset>
+        <label for="title" class="fieldplaceholder">Title</label>
+        <input type="text" name="title" id="title" v-model="internalData.title" />
+      </fieldset>
+      <fieldset>
+        <label for="additionalItems" class="fieldplaceholder">Allow additional items</label>
+        <select name="additionalItems" id="additionalItems" v-model="internalData.additionalItems">
+          <option :value="true">Yes</option>
+          <option :value="false">No</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <label for="uniqueItems" class="fieldplaceholder">Unique items</label>
+        <select name="uniqueItems" id="uniqueItems" v-model="internalData.uniqueItems">
+          <option :value="true">Yes</option>
+          <option :value="false">No</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <label for="minItems" class="fieldplaceholder">Minimum items</label>
+        <input type="number" name="minItems" id="minItems" v-model="internalData.minItems" />
+      </fieldset>
+      <fieldset>
+        <label for="maxItems" class="fieldplaceholder">Maximum items</label>
+        <input type="number" name="maxItems" id="maxItems" v-model="internalData.maxItems" />
+      </fieldset>
     </form>
     <div class="control-form">
       <button class="save" @click.prevent="save">save</button>

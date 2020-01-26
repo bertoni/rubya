@@ -6,11 +6,13 @@
       </p>
       <p>{{ internalData.description || 'No description' }}</p>
       <p>Additional items: {{ internalData.additionalItems ? 'Yes' : 'No' }}, Unique items: {{ internalData.uniqueItems ? 'Yes' : 'No' }}, Minimum items: {{ internalData.minItems || '-' }}, Maximum items: {{ internalData.maxItems || '-' }}</p>
-      <div class="actions">
-        <button class="edit" @click.prevent="edit"></button>
-        <button class="new" @click.prevent="newChild"></button>
-        <button class="remove" @click.prevent="remove"></button>
-      </div>
+      <FloatingMenu
+        :showEdit="true"
+        :showAdd="true"
+        :showRemove="true"
+        @edit="edit"
+        @add="newChild"
+        @remove="remove" />
     </div>
     <ArrayForm
       v-if="form"
@@ -117,6 +119,7 @@ import StringTemplate from '../String/index.vue'
 import IntegerTemplate from '../Integer/index.vue'
 import NumberTemplate from '../Number/index.vue'
 import BooleanTemplate from '../Boolean/index.vue'
+import FloatingMenu from '../../components/FloatingMenu.vue'
 
 export default {
   name: 'ArrayTemplate',
@@ -128,7 +131,8 @@ export default {
     StringTemplate,
     IntegerTemplate,
     NumberTemplate,
-    BooleanTemplate
+    BooleanTemplate,
+    FloatingMenu
   },
   props: {
     allowChangeName: {

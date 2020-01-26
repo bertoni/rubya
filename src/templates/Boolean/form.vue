@@ -2,10 +2,22 @@
   <div class="form-template">
     <h3>Boolean</h3>
     <form class="form-object">
-      <input v-if="allowChangeName" type="text" v-model="internalData.name" placeholder="Name" :class="(fieldsWithError.name ? 'error' : '')" />
-      <textarea v-model="internalData.description" placeholder="Description"></textarea>
-      <input type="text" v-model="internalData.id" placeholder="Identification" />
-      <input type="text" v-model="internalData.title" placeholder="Title" />
+      <fieldset v-if="allowChangeName">
+        <label for="name" class="fieldplaceholder">Name</label>
+        <input type="text" name="name" id="name" v-model="internalData.name" :class="(fieldsWithError.name ? 'error' : '')" />
+      </fieldset>
+      <fieldset>
+        <label for="description" class="fieldplaceholder">Description</label>
+        <textarea name="description" id="description" v-model="internalData.description"></textarea>
+      </fieldset>
+      <fieldset>
+        <label for="id" class="fieldplaceholder">Identification</label>
+        <input type="text" name="id" id="id" v-model="internalData.id" />
+      </fieldset>
+      <fieldset>
+        <label for="title" class="fieldplaceholder">Title</label>
+        <input type="text" name="title" id="title" v-model="internalData.title" />
+      </fieldset>
     </form>
     <div class="control-form">
       <button class="save" @click.prevent="save">save</button>

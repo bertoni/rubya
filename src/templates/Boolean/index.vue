@@ -5,10 +5,12 @@
         <span class="name">{{ internalData.name }}</span> (<span class="type">boolean</span>): <span class="title">{{ internalData.title || 'No title' }}</span> | <span class="id">{{ internalData.id || 'No identification' }}</span>
       </p>
       <p>{{ internalData.description || 'No description' }}</p>
-      <div class="actions">
-        <button class="edit" @click.prevent="edit"></button>
-        <button class="remove" @click.prevent="remove"></button>
-      </div>
+      <FloatingMenu
+        :showEdit="true"
+        :showAdd="false"
+        :showRemove="true"
+        @edit="edit"
+        @remove="remove" />
     </div>
     <BooleanForm
       v-if="form"
@@ -23,11 +25,13 @@
 <script>
 import BooleanType from '../../DataStructure/BooleanType.js'
 import BooleanForm from './form.vue'
+import FloatingMenu from '../../components/FloatingMenu.vue'
 
 export default {
   name: 'BooleanTemplate',
   components: {
-    BooleanForm
+    BooleanForm,
+    FloatingMenu
   },
   props: {
     allowChangeName: {

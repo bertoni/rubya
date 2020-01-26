@@ -6,10 +6,12 @@
       </p>
       <p>{{ internalData.description || 'No description' }}</p>
       <p>Minimum length: {{ internalData.minLength || '-' }}, Maximum length: {{ internalData.maxLength || '-' }}, Pattern: {{ internalData.pattern || '-' }}, Format: {{ internalData.format || '-' }}</p>
-      <div class="actions">
-        <button class="edit" @click.prevent="edit"></button>
-        <button class="remove" @click.prevent="remove"></button>
-      </div>
+      <FloatingMenu
+        :showEdit="true"
+        :showAdd="false"
+        :showRemove="true"
+        @edit="edit"
+        @remove="remove" />
     </div>
     <StringForm
       v-if="form"
@@ -24,11 +26,13 @@
 <script>
 import StringType from '../../DataStructure/StringType.js'
 import StringForm from './form.vue'
+import FloatingMenu from '../../components/FloatingMenu.vue'
 
 export default {
   name: 'StringTemplate',
   components: {
-    StringForm
+    StringForm,
+    FloatingMenu
   },
   props: {
     allowChangeName: {
