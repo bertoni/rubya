@@ -5,7 +5,7 @@
         <span class="name">{{ internalData.name }}</span> (<span class="type">integer</span>): <span class="title">{{ internalData.title || 'No title' }}</span> | <span class="id">{{ internalData.id || 'No identification' }}</span>
       </p>
       <p>{{ internalData.description || 'No description' }}</p>
-      <p>Multiple of: {{ internalData.multipleOf || '-' }}, Minimum or equal: {{ internalData.minimum || '-' }}, Minimum: {{ internalData.exclusiveMinimum || '-' }}, Maximum or equal: {{ internalData.maximum || '-' }}, Maximum: {{ internalData.exclusiveMaximum || '-' }}</p>
+      <p>Multiple of: {{ showNumber(internalData.multipleOf) }}, Minimum or equal: {{ showNumber(internalData.minimum) }}, Minimum: {{ showNumber(internalData.exclusiveMinimum) }}, Maximum or equal: {{ showNumber(internalData.maximum) }}, Maximum: {{ showNumber(internalData.exclusiveMaximum) }}</p>
       <FloatingMenu
         :showEdit="true"
         :showAdd="false"
@@ -51,6 +51,9 @@ export default {
     }
   },
   methods: {
+    showNumber (number) {
+      return (typeof number === 'number') ? number : '-'
+    },
     update (newData) {
       this.internalData = newData
       this.form = false

@@ -3,11 +3,11 @@ import BaseType from './BaseType.js'
 function IntegerType (structure, name) {
   BaseType.call(this, structure, name)
   this.type = 'integer'
-  this.multipleOf = structure.multipleOf || null
-  this.minimum = structure.minimum || null
-  this.exclusiveMinimum = structure.exclusiveMinimum || null
-  this.maximum = structure.maximum || null
-  this.exclusiveMaximum = structure.exclusiveMaximum || null
+  this.multipleOf = (typeof structure.multipleOf === 'number') ? structure.multipleOf : null
+  this.minimum = (typeof structure.minimum === 'number') ? structure.minimum : null
+  this.exclusiveMinimum = (typeof structure.exclusiveMinimum === 'number') ? structure.exclusiveMinimum : null
+  this.maximum = (typeof structure.maximum === 'number') ? structure.maximum : null
+  this.exclusiveMaximum = (typeof structure.exclusiveMaximum === 'number') ? structure.exclusiveMaximum : null
 }
 
 IntegerType.prototype.toJson = function () {

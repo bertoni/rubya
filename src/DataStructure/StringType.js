@@ -3,8 +3,8 @@ import BaseType from './BaseType.js'
 function StringType (structure, name) {
   BaseType.call(this, structure, name)
   this.type = 'string'
-  this.minLength = structure.minLength || null
-  this.maxLength = structure.maxLength || null
+  this.minLength = (typeof structure.minLength === 'number') ? structure.minLength : null
+  this.maxLength = (typeof structure.maxLength === 'number') ? structure.maxLength : null
   this.pattern = structure.pattern || null
   this.format = structure.format || null
 }
