@@ -27,36 +27,42 @@
         :originalObject="internalData.items"
         :allowChangeName="false"
         @remove-me="removeChild"
+        @change="childUpdated"
         />
       <ArrayTemplate
         v-if="internalData.items.type && internalData.items.type === 'array'"
         :originalObject="internalData.items"
         :allowChangeName="false"
         @remove-me="removeChild"
+        @change="childUpdated"
         />
       <StringTemplate
         v-if="internalData.items.type && internalData.items.type === 'string'"
         :originalObject="internalData.items"
         :allowChangeName="false"
         @remove-me="removeChild"
+        @change="childUpdated"
         />
       <IntegerTemplate
         v-if="internalData.items.type && internalData.items.type === 'integer'"
         :originalObject="internalData.items"
         :allowChangeName="false"
         @remove-me="removeChild"
+        @change="childUpdated"
         />
       <NumberTemplate
         v-if="internalData.items.type && internalData.items.type === 'number'"
         :originalObject="internalData.items"
         :allowChangeName="false"
         @remove-me="removeChild"
+        @change="childUpdated"
         />
       <BooleanTemplate
         v-if="internalData.items.type && internalData.items.type === 'boolean'"
         :originalObject="internalData.items"
         :allowChangeName="false"
         @remove-me="removeChild"
+        @change="childUpdated"
         />
     </ul>
     <ul class="children multiple" v-if="Array.isArray(internalData.items) && internalData.items.length">
@@ -66,36 +72,42 @@
           :originalObject="item"
           :allowChangeName="false"
           @remove-me="removeChild"
+          @change="childUpdated"
           />
         <ArrayTemplate
           v-if="item && item.type && item.type === 'array'"
           :originalObject="item"
           :allowChangeName="false"
           @remove-me="removeChild"
+          @change="childUpdated"
           />
         <StringTemplate
           v-if="item && item.type && item.type === 'string'"
           :originalObject="item"
           :allowChangeName="false"
           @remove-me="removeChild"
+          @change="childUpdated"
           />
         <IntegerTemplate
           v-if="item && item.type && item.type === 'integer'"
           :originalObject="item"
           :allowChangeName="false"
           @remove-me="removeChild"
+          @change="childUpdated"
           />
         <NumberTemplate
           v-if="item && item.type && item.type === 'number'"
           :originalObject="item"
           :allowChangeName="false"
           @remove-me="removeChild"
+          @change="childUpdated"
           />
         <BooleanTemplate
           v-if="item && item.type && item.type === 'boolean'"
           :originalObject="item"
           :allowChangeName="false"
           @remove-me="removeChild"
+          @change="childUpdated"
           />
       </li>
     </ul>
@@ -155,6 +167,7 @@ export default {
     update (newData) {
       this.internalData = newData
       this.form = false
+      this.$emit('change', this.internalData)
     },
     edit () {
       this.form = true
@@ -163,16 +176,17 @@ export default {
       if (Array.isArray(this.internalData.items) && this.internalData.items.length) {
         child.name = this.internalData.items.length
         this.internalData.items.push(child)
+        return true
       } else if (Object.keys(this.internalData.items).length) {
         const oldChild = this.internalData.items
-        oldChild.name = 0
+        oldChild.name = '0'
         this.internalData.items = []
         this.internalData.items.push(oldChild)
-        child.name = this.internalData.items.length
+        child.name = this.internalData.items.length.toString()
         this.internalData.items.push(child)
-      } else {
-        this.internalData.items = child
+        return true
       }
+      this.internalData.items = child
     },
     newChild () {
       this.newchild = true
@@ -187,8 +201,29 @@ export default {
     removeChild (removedChild) {
       if (Array.isArray(this.internalData.items)) {
         this.internalData.items = this.internalData.items.filter(child => child.name !== removedChild.name)
+        if (this.internalData.items.length < 2) {
+          this.internalData.items = this.internalData.items[0]
+          this.internalData.items.name = ''
+        } else {
+          this.internalData.items = this.internalData.items.map((child, idx) => {
+            child.name = idx.toString()
+            return child
+          })
+        }
       } else {
         this.internalData.items = []
+      }
+    },
+    childUpdated (objectType) {
+      if (Array.isArray(this.internalData.items)) {
+        this.internalData.items = this.internalData.items.map(child => {
+          if (child.name === objectType.name) {
+            return objectType
+          }
+          return child
+        })
+      } else {
+        this.internalData.items = objectType
       }
     },
     remove () {

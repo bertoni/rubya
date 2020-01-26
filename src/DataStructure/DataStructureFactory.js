@@ -29,7 +29,7 @@ DataStructureFactory.create = function (structure, name) {
       if (Array.isArray(structure.items) && structure.items.length) {
         arrayType.items = []
         for (let idx in structure.items) {
-          let child = this.create(structure.items[idx], idx)
+          let child = this.create(structure.items[idx], idx.toString())
           if (!(child instanceof Error)) {
             arrayType.items.push(child)
           }

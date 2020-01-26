@@ -53,6 +53,7 @@ export default {
     update (newData) {
       this.internalData = newData
       this.form = false
+      this.$emit('change', this.internalData)
     },
     edit () {
       this.form = true

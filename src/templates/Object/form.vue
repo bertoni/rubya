@@ -27,11 +27,11 @@
       </fieldset>
       <fieldset>
         <label for="minProperties" class="fieldplaceholder">Minimum Properties</label>
-        <input type="number" name="minProperties" id="minProperties" v-model="internalData.minProperties" />
+        <input type="number" name="minProperties" id="minProperties" v-model.number="internalData.minProperties" />
       </fieldset>
       <fieldset>
         <label for="maxProperties" class="fieldplaceholder">Maximum Properties</label>
-        <input type="number" name="maxProperties" id="maxProperties" v-model="internalData.maxProperties" />
+        <input type="number" name="maxProperties" id="maxProperties" v-model.number="internalData.maxProperties" />
       </fieldset>
       <fieldset v-if="children.length">
         <label class="fieldplaceholder">Required Children: </label>

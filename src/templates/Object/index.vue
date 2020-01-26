@@ -33,26 +33,31 @@
           v-if="propertie && propertie.type && propertie.type === 'array'"
           :originalObject="propertie"
           @remove-me="removeChild"
+          @change="childUpdated"
           />
         <StringTemplate
           v-if="propertie && propertie.type && propertie.type === 'string'"
           :originalObject="propertie"
           @remove-me="removeChild"
+          @change="childUpdated"
           />
         <IntegerTemplate
           v-if="propertie && propertie.type && propertie.type === 'integer'"
           :originalObject="propertie"
           @remove-me="removeChild"
+          @change="childUpdated"
           />
         <NumberTemplate
           v-if="propertie && propertie.type && propertie.type === 'number'"
           :originalObject="propertie"
           @remove-me="removeChild"
+          @change="childUpdated"
           />
         <BooleanTemplate
           v-if="propertie && propertie.type && propertie.type === 'boolean'"
           :originalObject="propertie"
           @remove-me="removeChild"
+          @change="childUpdated"
           />
       </li>
     </ul>

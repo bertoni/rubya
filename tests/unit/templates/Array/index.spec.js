@@ -145,18 +145,32 @@ describe('ArrayTemplate.vue', () => {
         originalObject: new ArrayType(structure, name)
       }
     })
-    let boolean01Structure = {
-      name: 'newfield',
+    let boolean01 = new BooleanType({
       title: 'New Boolean field',
       id: '#newfield',
       description: 'Some new description'
-    }
-    let boolean01 = new BooleanType(boolean01Structure, boolean01Structure.name)
+    }, '0')
+    let boolean02 = new BooleanType({
+      title: 'New Boolean field',
+      id: '#newfield',
+      description: 'Some new description'
+    }, '1')
+    let boolean03 = new BooleanType({
+      title: 'New Boolean field',
+      id: '#newfield',
+      description: 'Some new description'
+    }, '2')
     let arrayType = new ArrayType(newStructure, newStructure.name)
     arrayType.items.push(boolean01)
+    arrayType.items.push(boolean02)
+    arrayType.items.push(boolean03)
     wrapper.vm.update(arrayType)
-    expect(wrapper.vm.internalData.items.length).toBe(1)
+    expect(wrapper.vm.internalData.items.length).toBe(3)
     wrapper.vm.removeChild(boolean01)
+    expect(wrapper.vm.internalData.items.length).toBe(2)
+    wrapper.vm.removeChild(boolean02)
+    expect(wrapper.vm.internalData.items.name).toBe(boolean03.name)
+    wrapper.vm.removeChild(boolean03)
     expect(wrapper.vm.internalData.items.length).toBe(0)
   })
 
@@ -281,5 +295,51 @@ describe('ArrayTemplate.vue', () => {
     }
     wrapper.vm.addChild(new BooleanType(boolean02Structure))
     expect(wrapper.vm.internalData.items.length).toBe(2)
+  })
+
+  it('should change specific child in childUpdated method', () => {
+    wrapper = shallowMount(ArrayTemplate, {
+      propsData: {
+        allowChangeName: true,
+        originalObject: new ArrayType(structure, name)
+      }
+    })
+    let boolean01 = new BooleanType({
+      title: 'New Boolean field',
+      id: '#newfield',
+      description: 'Some new description'
+    })
+    wrapper.vm.addChild(boolean01)
+    wrapper.vm.childUpdated(new BooleanType({
+      title: 'New Boolean field',
+      id: '#changedfield',
+      description: 'Some new description'
+    }))
+    expect(wrapper.vm.internalData.items.id).toBe('#changedfield')
+  })
+
+  it('should change specific child in childUpdated method with more than one child', () => {
+    wrapper = shallowMount(ArrayTemplate, {
+      propsData: {
+        allowChangeName: true,
+        originalObject: new ArrayType(structure, name)
+      }
+    })
+    wrapper.vm.addChild(new BooleanType({
+      title: 'New Boolean field',
+      id: '#onechild',
+      description: 'Some new description'
+    }))
+    wrapper.vm.addChild(new BooleanType({
+      title: 'New Boolean field',
+      id: '#twochild',
+      description: 'Some new description'
+    }))
+    wrapper.vm.childUpdated(new BooleanType({
+      title: 'New Boolean field',
+      id: '#changedfield',
+      description: 'Some new description'
+    }, '1'))
+    expect(wrapper.vm.internalData.items[1].id).toBe('#changedfield')
   })
 })

@@ -34,11 +34,11 @@
       </fieldset>
       <fieldset>
         <label for="minItems" class="fieldplaceholder">Minimum items</label>
-        <input type="number" name="minItems" id="minItems" v-model="internalData.minItems" />
+        <input type="number" name="minItems" id="minItems" v-model.number="internalData.minItems" />
       </fieldset>
       <fieldset>
         <label for="maxItems" class="fieldplaceholder">Maximum items</label>
-        <input type="number" name="maxItems" id="maxItems" v-model="internalData.maxItems" />
+        <input type="number" name="maxItems" id="maxItems" v-model.number="internalData.maxItems" />
       </fieldset>
     </form>
     <div class="control-form">
