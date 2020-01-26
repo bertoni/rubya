@@ -26,33 +26,33 @@
         <ObjectTemplate
           v-if="propertie && propertie.type && propertie.type === 'object'"
           :originalObject="propertie"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           @change="childUpdated"
           />
         <ArrayTemplate
           v-if="propertie && propertie.type && propertie.type === 'array'"
           :originalObject="propertie"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <StringTemplate
           v-if="propertie && propertie.type && propertie.type === 'string'"
           :originalObject="propertie"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <IntegerTemplate
           v-if="propertie && propertie.type && propertie.type === 'integer'"
           :originalObject="propertie"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <NumberTemplate
           v-if="propertie && propertie.type && propertie.type === 'number'"
           :originalObject="propertie"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <BooleanTemplate
           v-if="propertie && propertie.type && propertie.type === 'boolean'"
           :originalObject="propertie"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
       </li>
     </ul>
@@ -135,7 +135,7 @@ export default {
       this.internalData.required = this.internalData.required.filter(child => child !== removedChild.name)
     },
     remove () {
-      this.$emit('removeMe', this.internalData)
+      this.$emit('remove-me', this.internalData)
     },
     childUpdated (objectType) {
       this.internalData.properties = this.internalData.properties.map(child => {

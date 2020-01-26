@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/rubya"></script>
+        <title>Rubya | Demo Page</title>
+        <style>
+            html, body { height: 100%; margin: 0; padding: 0; }
+            #app { height: 100%; padding: 10px; }
+            h1 { margin-top: 0; }
+            #generate { position: fixed; top: 10px; right: 10px; }
+            #rubya { float: left; width: 48%; }
+            #generated-schema { float: right; width: 48%; height: 100%; }
+            #generated-schema textarea { width: 99%; height: 95%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="app">
+            <h1>Rubya</h1>
+            <p>Project destined to create json schema of visual form in vue.js</p>
+            <p>You can try usage the interface below.</p>
+            <a id="generate" href="#" @click.prevent="printSchema">Generate Json Schema</a>
+            <form id="generated-schema">
+                <label>Json Schema:</label>
+                <textarea disabled="disabled">{{ generatedSchema }}</textarea>
+            </form>
+            <Rubya
+                id="rubya"
+                ref="Rubya"
+                :schema="schema"
+                @updatedSchema="updatedSchema" />
+        </div>
+        <script>
+          const App = new Vue({
+            el: '#app',
+            data: {
+              generatedSchema: '',
+              schema: {
+                '$schema': 'http://json-schema.org/draft-07/schema#',
+                '$id': 'http://example.com/product.schema.json',
+                'title': 'Root node of object',
+                'description': 'Some description about node',
+                'type': 'object',
+                'required': ['date'],
+                'additionalProperties': true,
+                'properties': {
+                  'date': {
+                    'type': 'string',
+                    'title': 'Date',
+                    'description': 'Date of birthday',
+                    'minLength': 10,
+                    'maxLength': 20,
+                    'pattern': '/[0-9]/',
+                    'format': 'date'
+                  }
+                }
+              }
+            },
+            methods: {
+              printSchema () {
+                this.$refs.Rubya.getJsonSchema()
+              },
+              updatedSchema (schema) {
+                this.generatedSchema = JSON.stringify(schema, null, 2)
+              }
+            },
+            mounted () {
+              this.$refs.Rubya.getJsonSchema()
+            }
+          })
+        </script>
+    </body>
+</html>

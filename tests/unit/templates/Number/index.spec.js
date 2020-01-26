@@ -71,7 +71,7 @@ describe('NumberTemplate.vue', () => {
     expect(wrapper.vm.internalData.name).toBe(name)
   })
 
-  it('should $emit removeMe in remove method', () => {
+  it('should $emit remove-me in remove method', () => {
     wrapper = shallowMount(NumberTemplate, {
       propsData: {
         allowChangeName: true,
@@ -80,7 +80,7 @@ describe('NumberTemplate.vue', () => {
     })
     wrapper.vm.remove()
     expect(typeof wrapper.emitted()).toBe('object')
-    expect(typeof wrapper.emitted().removeMe).toBe('object')
+    expect(typeof wrapper.emitted()['remove-me']).toBe('object')
   })
 
   it('should change form state in edit method', () => {

@@ -71,7 +71,7 @@ describe('ArrayTemplate.vue', () => {
     expect(wrapper.vm.internalData.name).toBe(name)
   })
 
-  it('should $emit removeMe in remove method', () => {
+  it('should $emit remove-me in remove method', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
@@ -80,7 +80,7 @@ describe('ArrayTemplate.vue', () => {
     })
     wrapper.vm.remove()
     expect(typeof wrapper.emitted()).toBe('object')
-    expect(typeof wrapper.emitted().removeMe).toBe('object')
+    expect(typeof wrapper.emitted()['remove-me']).toBe('object')
   })
 
   it('should change form state in edit method', () => {
@@ -156,6 +156,39 @@ describe('ArrayTemplate.vue', () => {
     arrayType.items.push(boolean01)
     wrapper.vm.update(arrayType)
     expect(wrapper.vm.internalData.items.length).toBe(1)
+    wrapper.vm.removeChild(boolean01)
+    expect(wrapper.vm.internalData.items.length).toBe(0)
+  })
+
+  it('should remove unique object item in removeChild method', () => {
+    const newStructure = {
+      name: 'newfield',
+      title: 'New Array field',
+      id: '#newfield',
+      description: 'Some new description',
+      items: [],
+      additionalItems: true,
+      uniqueItems: true,
+      minItems: 2,
+      maxItems: 3
+    }
+    wrapper = shallowMount(ArrayTemplate, {
+      propsData: {
+        allowChangeName: true,
+        originalObject: new ArrayType(structure, name)
+      }
+    })
+    let boolean01Structure = {
+      name: 'newfield',
+      title: 'New Boolean field',
+      id: '#newfield',
+      description: 'Some new description'
+    }
+    let boolean01 = new BooleanType(boolean01Structure, boolean01Structure.name)
+    let arrayType = new ArrayType(newStructure, newStructure.name)
+    arrayType.items = boolean01
+    wrapper.vm.update(arrayType)
+    expect(wrapper.vm.internalData.items.name).toBe(boolean01Structure.name)
     wrapper.vm.removeChild(boolean01)
     expect(wrapper.vm.internalData.items.length).toBe(0)
   })

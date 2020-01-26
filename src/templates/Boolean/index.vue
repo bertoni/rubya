@@ -58,7 +58,7 @@ export default {
       this.form = true
     },
     remove () {
-      this.$emit('removeMe', this.internalData)
+      this.$emit('remove-me', this.internalData)
     }
   },
   mounted () {

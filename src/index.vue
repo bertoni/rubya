@@ -3,7 +3,7 @@
     v-if="tree !== null"
     :originalObject="tree"
     :allowChangeName="false"
-    @removeMe="removeChild"
+    @remove-me="removeChild"
     @change="childUpdated"
     />
 </template>
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     getJsonSchema () {
-      this.$emit('updatedSchema', this.tree.toJson())
+      this.$emit('updated-schema', this.tree.toJson())
     },
     childUpdated (objectType) {
       this.tree = objectType

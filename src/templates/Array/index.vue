@@ -26,37 +26,37 @@
         v-if="internalData.items.type && internalData.items.type === 'object'"
         :originalObject="internalData.items"
         :allowChangeName="false"
-        @removeMe="removeChild"
+        @remove-me="removeChild"
         />
       <ArrayTemplate
         v-if="internalData.items.type && internalData.items.type === 'array'"
         :originalObject="internalData.items"
         :allowChangeName="false"
-        @removeMe="removeChild"
+        @remove-me="removeChild"
         />
       <StringTemplate
         v-if="internalData.items.type && internalData.items.type === 'string'"
         :originalObject="internalData.items"
         :allowChangeName="false"
-        @removeMe="removeChild"
+        @remove-me="removeChild"
         />
       <IntegerTemplate
         v-if="internalData.items.type && internalData.items.type === 'integer'"
         :originalObject="internalData.items"
         :allowChangeName="false"
-        @removeMe="removeChild"
+        @remove-me="removeChild"
         />
       <NumberTemplate
         v-if="internalData.items.type && internalData.items.type === 'number'"
         :originalObject="internalData.items"
         :allowChangeName="false"
-        @removeMe="removeChild"
+        @remove-me="removeChild"
         />
       <BooleanTemplate
         v-if="internalData.items.type && internalData.items.type === 'boolean'"
         :originalObject="internalData.items"
         :allowChangeName="false"
-        @removeMe="removeChild"
+        @remove-me="removeChild"
         />
     </ul>
     <ul class="children multiple" v-if="Array.isArray(internalData.items) && internalData.items.length">
@@ -65,37 +65,37 @@
           v-if="item && item.type && item.type === 'object'"
           :originalObject="item"
           :allowChangeName="false"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <ArrayTemplate
           v-if="item && item.type && item.type === 'array'"
           :originalObject="item"
           :allowChangeName="false"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <StringTemplate
           v-if="item && item.type && item.type === 'string'"
           :originalObject="item"
           :allowChangeName="false"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <IntegerTemplate
           v-if="item && item.type && item.type === 'integer'"
           :originalObject="item"
           :allowChangeName="false"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <NumberTemplate
           v-if="item && item.type && item.type === 'number'"
           :originalObject="item"
           :allowChangeName="false"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <BooleanTemplate
           v-if="item && item.type && item.type === 'boolean'"
           :originalObject="item"
           :allowChangeName="false"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
       </li>
     </ul>
@@ -185,10 +185,14 @@ export default {
       }, 100)
     },
     removeChild (removedChild) {
-      this.internalData.items = this.internalData.items.filter(child => child.name !== removedChild.name)
+      if (Array.isArray(this.internalData.items)) {
+        this.internalData.items = this.internalData.items.filter(child => child.name !== removedChild.name)
+      } else {
+        this.internalData.items = []
+      }
     },
     remove () {
-      this.$emit('removeMe', this.internalData)
+      this.$emit('remove-me', this.internalData)
     }
   },
   mounted () {
