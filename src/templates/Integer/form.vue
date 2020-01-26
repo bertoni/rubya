@@ -20,23 +20,23 @@
       </fieldset>
       <fieldset>
         <label for="multipleOf" class="fieldplaceholder">Multiple of</label>
-        <input type="number" name="multipleOf" id="multipleOf" v-model="internalData.multipleOf" />
+        <input type="number" name="multipleOf" id="multipleOf" v-model.number="internalData.multipleOf" />
       </fieldset>
       <fieldset>
         <label for="minimum" class="fieldplaceholder">Minimum or equal</label>
-        <input type="number" name="minimum" id="minimum" v-model="internalData.minimum" />
+        <input type="number" name="minimum" id="minimum" v-model.number="internalData.minimum" />
       </fieldset>
       <fieldset>
         <label for="exclusiveMinimum" class="fieldplaceholder">Minimum</label>
-        <input type="number" name="exclusiveMinimum" id="exclusiveMinimum" v-model="internalData.exclusiveMinimum" />
+        <input type="number" name="exclusiveMinimum" id="exclusiveMinimum" v-model.number="internalData.exclusiveMinimum" />
       </fieldset>
       <fieldset>
         <label for="maximum" class="fieldplaceholder">Maximum or equal</label>
-        <input type="number" name="maximum" id="maximum" v-model="internalData.maximum" />
+        <input type="number" name="maximum" id="maximum" v-model.number="internalData.maximum" />
       </fieldset>
       <fieldset>
         <label for="exclusiveMaximum" class="fieldplaceholder">Maximum</label>
-        <input type="number" name="exclusiveMaximum" id="exclusiveMaximum" v-model="internalData.exclusiveMaximum" />
+        <input type="number" name="exclusiveMaximum" id="exclusiveMaximum" v-model.number="internalData.exclusiveMaximum" />
       </fieldset>
     </form>
     <div class="control-form">

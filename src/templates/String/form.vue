@@ -20,11 +20,11 @@
       </fieldset>
       <fieldset>
         <label for="minLength" class="fieldplaceholder">Minimum length</label>
-        <input type="number" name="minLength" id="minLength" v-model="internalData.minLength" />
+        <input type="number" name="minLength" id="minLength" v-model.number="internalData.minLength" />
       </fieldset>
       <fieldset>
         <label for="maxLength" class="fieldplaceholder">Maximum length</label>
-        <input type="number" name="maxLength" id="maxLength" v-model="internalData.maxLength" />
+        <input type="number" name="maxLength" id="maxLength" v-model.number="internalData.maxLength" />
       </fieldset>
       <fieldset>
         <label for="pattern" class="fieldplaceholder">Pattern</label>
