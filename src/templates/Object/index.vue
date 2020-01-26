@@ -5,7 +5,7 @@
         <span class="name">{{ internalData.name }}</span> (<span class="type">object</span>): <span class="title">{{ internalData.title || 'No title' }}</span> | <span class="id">{{ internalData.id || 'No identification' }}</span>
       </p>
       <p>{{ internalData.description || 'No description' }}</p>
-      <p>Additional properties: {{ internalData.additionalProperties ? 'Yes' : 'No' }}, Minimum properties: {{ internalData.minProperties || '-' }}, Maximum properties: {{ internalData.maxProperties || '-' }}, Required children: {{ internalData.required || '-' }}</p>
+      <p>Additional properties: {{ internalData.additionalProperties ? 'Yes' : 'No' }}, Minimum properties: {{ showNumber(internalData.minProperties) }}, Maximum properties: {{ showNumber(internalData.maxProperties) }}, Required children: {{ internalData.required || '-' }}</p>
       <FloatingMenu
         :showEdit="true"
         :showAdd="true"
@@ -114,6 +114,9 @@ export default {
     }
   },
   methods: {
+    showNumber (number) {
+      return (typeof number === 'number') ? number : '-'
+    },
     update (newData) {
       this.internalData = newData
       this.form = false

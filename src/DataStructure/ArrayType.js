@@ -6,8 +6,8 @@ function ArrayType (structure, name) {
   this.items = structure.items || []
   this.additionalItems = structure.additionalItems || false
   this.uniqueItems = structure.uniqueItems || false
-  this.minItems = structure.minItems || null
-  this.maxItems = structure.maxItems || null
+  this.minItems = (typeof structure.minItems === 'number') ? structure.minItems : null
+  this.maxItems = (typeof structure.maxItems === 'number') ? structure.maxItems : null
 }
 
 ArrayType.prototype.toJson = function () {

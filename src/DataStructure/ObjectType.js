@@ -6,8 +6,8 @@ function ObjectType (structure, name) {
   this.properties = Array.isArray(structure.properties) ? structure.properties : []
   this.required = structure.required || []
   this.additionalProperties = structure.additionalProperties || false
-  this.minProperties = structure.minProperties || null
-  this.maxProperties = structure.maxProperties || null
+  this.minProperties = (typeof structure.minProperties === 'number') ? structure.minProperties : null
+  this.maxProperties = (typeof structure.maxProperties === 'number') ? structure.maxProperties : null
 }
 
 ObjectType.prototype.toJson = function () {

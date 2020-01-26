@@ -5,7 +5,7 @@
         <span class="name">{{ internalData.name }}</span> (<span class="type">string</span>): <span class="title">{{ internalData.title || 'No title' }}</span> | <span class="id">{{ internalData.id || 'No identification' }}</span>
       </p>
       <p>{{ internalData.description || 'No description' }}</p>
-      <p>Minimum length: {{ internalData.minLength || '-' }}, Maximum length: {{ internalData.maxLength || '-' }}, Pattern: {{ internalData.pattern || '-' }}, Format: {{ internalData.format || '-' }}</p>
+      <p>Minimum length: {{ showNumber(internalData.minLength) }}, Maximum length: {{ showNumber(internalData.maxLength) }}, Pattern: {{ internalData.pattern || '-' }}, Format: {{ internalData.format || '-' }}</p>
       <FloatingMenu
         :showEdit="true"
         :showAdd="false"
@@ -51,6 +51,9 @@ export default {
     }
   },
   methods: {
+    showNumber (number) {
+      return (typeof number === 'number') ? number : '-'
+    },
     update (newData) {
       this.internalData = newData
       this.form = false
