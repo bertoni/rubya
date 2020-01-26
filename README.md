@@ -2,6 +2,7 @@
 
 > Project destined to create json schema of visual form in vue.js
 
+[![npm version](https://badge.fury.io/js/rubya.svg)](https://badge.fury.io/js/rubya)
 [![Build Status](https://travis-ci.org/bertoni/rubya.svg?branch=master)](https://travis-ci.org/bertoni/rubya)
 [![codecov](https://codecov.io/gh/bertoni/rubya/branch/master/graph/badge.svg)](https://codecov.io/gh/bertoni/rubya)
 
@@ -39,7 +40,7 @@ Vue.use(Rubya)
     <Rubya
       ref="Rubya"
       :schema="schema"
-      @updatedSchema="updatedSchema" />
+      @updated-schema="updatedSchema" />
   </div>
 </template>
 ```

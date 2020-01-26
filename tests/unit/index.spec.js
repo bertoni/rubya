@@ -52,14 +52,14 @@ describe('index.vue', () => {
     expect(wrapper.vm.tree instanceof ObjectType).toBeTruthy()
   })
 
-  it('should $emit updatedSchema in getJsonSchema method', () => {
+  it('should $emit updated-schema in getJsonSchema method', () => {
     wrapper = shallowMount(Rubya, {
       propsData: {}
     })
     wrapper.vm.getJsonSchema()
     expect(typeof wrapper.emitted()).toBe('object')
-    expect(typeof wrapper.emitted().updatedSchema).toBe('object')
-    expect(typeof wrapper.emitted().updatedSchema[0]).toBe('object')
+    expect(typeof wrapper.emitted()['updated-schema']).toBe('object')
+    expect(typeof wrapper.emitted()['updated-schema'][0]).toBe('object')
   })
 
   it('should change tree state in removeChild  method', () => {

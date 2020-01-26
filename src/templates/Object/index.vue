@@ -6,11 +6,13 @@
       </p>
       <p>{{ internalData.description || 'No description' }}</p>
       <p>Additional properties: {{ internalData.additionalProperties ? 'Yes' : 'No' }}, Minimum properties: {{ internalData.minProperties || '-' }}, Maximum properties: {{ internalData.maxProperties || '-' }}, Required children: {{ internalData.required || '-' }}</p>
-      <div class="actions">
-        <button class="edit" @click.prevent="edit"></button>
-        <button class="new" @click.prevent="newChild"></button>
-        <button class="remove" @click.prevent="remove"></button>
-      </div>
+      <FloatingMenu
+        :showEdit="true"
+        :showAdd="true"
+        :showRemove="true"
+        @edit="edit"
+        @add="newChild"
+        @remove="remove" />
     </div>
     <ObjectForm
       v-if="form"
@@ -24,32 +26,33 @@
         <ObjectTemplate
           v-if="propertie && propertie.type && propertie.type === 'object'"
           :originalObject="propertie"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
+          @change="childUpdated"
           />
         <ArrayTemplate
           v-if="propertie && propertie.type && propertie.type === 'array'"
           :originalObject="propertie"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <StringTemplate
           v-if="propertie && propertie.type && propertie.type === 'string'"
           :originalObject="propertie"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <IntegerTemplate
           v-if="propertie && propertie.type && propertie.type === 'integer'"
           :originalObject="propertie"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <NumberTemplate
           v-if="propertie && propertie.type && propertie.type === 'number'"
           :originalObject="propertie"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <BooleanTemplate
           v-if="propertie && propertie.type && propertie.type === 'boolean'"
           :originalObject="propertie"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
       </li>
     </ul>
@@ -73,6 +76,7 @@ import StringTemplate from '../String/index.vue'
 import IntegerTemplate from '../Integer/index.vue'
 import NumberTemplate from '../Number/index.vue'
 import BooleanTemplate from '../Boolean/index.vue'
+import FloatingMenu from '../../components/FloatingMenu.vue'
 
 export default {
   name: 'ObjectTemplate',
@@ -84,7 +88,8 @@ export default {
     StringTemplate,
     IntegerTemplate,
     NumberTemplate,
-    BooleanTemplate
+    BooleanTemplate,
+    FloatingMenu
   },
   props: {
     allowChangeName: {
@@ -127,9 +132,16 @@ export default {
     },
     removeChild (removedChild) {
       this.internalData.properties = this.internalData.properties.filter(child => child.name !== removedChild.name)
+      this.internalData.required = this.internalData.required.filter(child => child !== removedChild.name)
     },
     remove () {
-      this.$emit('removeMe', this.internalData)
+      this.$emit('remove-me', this.internalData)
+    },
+    childUpdated (objectType) {
+      this.internalData.properties = this.internalData.properties.map(child => {
+        if (child.name === objectType.name) return objectType
+        return child
+      })
     }
   },
   mounted () {

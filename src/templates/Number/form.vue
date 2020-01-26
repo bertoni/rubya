@@ -2,15 +2,42 @@
   <div class="form-template">
     <h3>Number</h3>
     <form class="form-object">
-      <input v-if="allowChangeName" type="text" v-model="internalData.name" placeholder="Name" :class="(fieldsWithError.name ? 'error' : '')" />
-      <textarea v-model="internalData.description" placeholder="Description"></textarea>
-      <input type="text" v-model="internalData.id" placeholder="Identification" />
-      <input type="text" v-model="internalData.title" placeholder="Title" />
-      <input type="number" v-model="internalData.multipleOf" placeholder="Multiple of" />
-      <input type="number" v-model="internalData.minimum" placeholder="Minimum or equal" />
-      <input type="number" v-model="internalData.exclusiveMinimum" placeholder="Minimum" />
-      <input type="number" v-model="internalData.maximum" placeholder="Maximum or equal" />
-      <input type="number" v-model="internalData.exclusiveMaximum" placeholder="Maximum" />
+      <fieldset v-if="allowChangeName">
+        <label for="name" class="fieldplaceholder">Name</label>
+        <input type="text" name="name" id="name" v-model="internalData.name" :class="(fieldsWithError.name ? 'error' : '')" />
+      </fieldset>
+      <fieldset>
+        <label for="description" class="fieldplaceholder">Description</label>
+        <textarea name="description" id="description" v-model="internalData.description"></textarea>
+      </fieldset>
+      <fieldset>
+        <label for="id" class="fieldplaceholder">Identification</label>
+        <input type="text" name="id" id="id" v-model="internalData.id" />
+      </fieldset>
+      <fieldset>
+        <label for="title" class="fieldplaceholder">Title</label>
+        <input type="text" name="title" id="title" v-model="internalData.title" />
+      </fieldset>
+      <fieldset>
+        <label for="multipleOf" class="fieldplaceholder">Multiple of</label>
+        <input type="number" name="multipleOf" id="multipleOf" v-model="internalData.multipleOf" />
+      </fieldset>
+      <fieldset>
+        <label for="minimum" class="fieldplaceholder">Minimum or equal</label>
+        <input type="number" name="minimum" id="minimum" v-model="internalData.minimum" />
+      </fieldset>
+      <fieldset>
+        <label for="exclusiveMinimum" class="fieldplaceholder">Minimum</label>
+        <input type="number" name="exclusiveMinimum" id="exclusiveMinimum" v-model="internalData.exclusiveMinimum" />
+      </fieldset>
+      <fieldset>
+        <label for="maximum" class="fieldplaceholder">Maximum or equal</label>
+        <input type="number" name="maximum" id="maximum" v-model="internalData.maximum" />
+      </fieldset>
+      <fieldset>
+        <label for="exclusiveMaximum" class="fieldplaceholder">Maximum</label>
+        <input type="number" name="exclusiveMaximum" id="exclusiveMaximum" v-model="internalData.exclusiveMaximum" />
+      </fieldset>
     </form>
     <div class="control-form">
       <button class="save" @click.prevent="save">save</button>

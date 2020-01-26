@@ -6,10 +6,12 @@
       </p>
       <p>{{ internalData.description || 'No description' }}</p>
       <p>Multiple of: {{ internalData.multipleOf || '-' }}, Minimum or equal: {{ internalData.minimum || '-' }}, Minimum: {{ internalData.exclusiveMinimum || '-' }}, Maximum or equal: {{ internalData.maximum || '-' }}, Maximum: {{ internalData.exclusiveMaximum || '-' }}</p>
-      <div class="actions">
-        <button class="edit" @click.prevent="edit"></button>
-        <button class="remove" @click.prevent="remove"></button>
-      </div>
+      <FloatingMenu
+        :showEdit="true"
+        :showAdd="false"
+        :showRemove="true"
+        @edit="edit"
+        @remove="remove" />
     </div>
     <IntegerForm
       v-if="form"
@@ -24,11 +26,13 @@
 <script>
 import IntegerType from '../../DataStructure/IntegerType.js'
 import IntegerForm from './form.vue'
+import FloatingMenu from '../../components/FloatingMenu.vue'
 
 export default {
   name: 'IntegerTemplate',
   components: {
-    IntegerForm
+    IntegerForm,
+    FloatingMenu
   },
   props: {
     allowChangeName: {
@@ -55,7 +59,7 @@ export default {
       this.form = true
     },
     remove () {
-      this.$emit('removeMe', this.internalData)
+      this.$emit('remove-me', this.internalData)
     }
   },
   mounted () {

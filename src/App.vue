@@ -4,7 +4,7 @@
     <Rubya
       ref="Rubya"
       :schema="schema"
-      @updatedSchema="updatedSchema"
+      @updated-schema="updatedSchema"
       />
   </div>
 </template>

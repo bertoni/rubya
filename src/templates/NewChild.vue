@@ -110,7 +110,7 @@ export default {
 
 <style scoped>
 .new-child {
-  background-color: #faffa6;
+  border: 1px solid #c1c1c1;
   padding: 5px 15px;
 }
 form.options {

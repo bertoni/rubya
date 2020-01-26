@@ -6,11 +6,13 @@
       </p>
       <p>{{ internalData.description || 'No description' }}</p>
       <p>Additional items: {{ internalData.additionalItems ? 'Yes' : 'No' }}, Unique items: {{ internalData.uniqueItems ? 'Yes' : 'No' }}, Minimum items: {{ internalData.minItems || '-' }}, Maximum items: {{ internalData.maxItems || '-' }}</p>
-      <div class="actions">
-        <button class="edit" @click.prevent="edit"></button>
-        <button class="new" @click.prevent="newChild"></button>
-        <button class="remove" @click.prevent="remove"></button>
-      </div>
+      <FloatingMenu
+        :showEdit="true"
+        :showAdd="true"
+        :showRemove="true"
+        @edit="edit"
+        @add="newChild"
+        @remove="remove" />
     </div>
     <ArrayForm
       v-if="form"
@@ -24,37 +26,37 @@
         v-if="internalData.items.type && internalData.items.type === 'object'"
         :originalObject="internalData.items"
         :allowChangeName="false"
-        @removeMe="removeChild"
+        @remove-me="removeChild"
         />
       <ArrayTemplate
         v-if="internalData.items.type && internalData.items.type === 'array'"
         :originalObject="internalData.items"
         :allowChangeName="false"
-        @removeMe="removeChild"
+        @remove-me="removeChild"
         />
       <StringTemplate
         v-if="internalData.items.type && internalData.items.type === 'string'"
         :originalObject="internalData.items"
         :allowChangeName="false"
-        @removeMe="removeChild"
+        @remove-me="removeChild"
         />
       <IntegerTemplate
         v-if="internalData.items.type && internalData.items.type === 'integer'"
         :originalObject="internalData.items"
         :allowChangeName="false"
-        @removeMe="removeChild"
+        @remove-me="removeChild"
         />
       <NumberTemplate
         v-if="internalData.items.type && internalData.items.type === 'number'"
         :originalObject="internalData.items"
         :allowChangeName="false"
-        @removeMe="removeChild"
+        @remove-me="removeChild"
         />
       <BooleanTemplate
         v-if="internalData.items.type && internalData.items.type === 'boolean'"
         :originalObject="internalData.items"
         :allowChangeName="false"
-        @removeMe="removeChild"
+        @remove-me="removeChild"
         />
     </ul>
     <ul class="children multiple" v-if="Array.isArray(internalData.items) && internalData.items.length">
@@ -63,37 +65,37 @@
           v-if="item && item.type && item.type === 'object'"
           :originalObject="item"
           :allowChangeName="false"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <ArrayTemplate
           v-if="item && item.type && item.type === 'array'"
           :originalObject="item"
           :allowChangeName="false"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <StringTemplate
           v-if="item && item.type && item.type === 'string'"
           :originalObject="item"
           :allowChangeName="false"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <IntegerTemplate
           v-if="item && item.type && item.type === 'integer'"
           :originalObject="item"
           :allowChangeName="false"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <NumberTemplate
           v-if="item && item.type && item.type === 'number'"
           :originalObject="item"
           :allowChangeName="false"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
         <BooleanTemplate
           v-if="item && item.type && item.type === 'boolean'"
           :originalObject="item"
           :allowChangeName="false"
-          @removeMe="removeChild"
+          @remove-me="removeChild"
           />
       </li>
     </ul>
@@ -117,6 +119,7 @@ import StringTemplate from '../String/index.vue'
 import IntegerTemplate from '../Integer/index.vue'
 import NumberTemplate from '../Number/index.vue'
 import BooleanTemplate from '../Boolean/index.vue'
+import FloatingMenu from '../../components/FloatingMenu.vue'
 
 export default {
   name: 'ArrayTemplate',
@@ -128,7 +131,8 @@ export default {
     StringTemplate,
     IntegerTemplate,
     NumberTemplate,
-    BooleanTemplate
+    BooleanTemplate,
+    FloatingMenu
   },
   props: {
     allowChangeName: {
@@ -181,10 +185,14 @@ export default {
       }, 100)
     },
     removeChild (removedChild) {
-      this.internalData.items = this.internalData.items.filter(child => child.name !== removedChild.name)
+      if (Array.isArray(this.internalData.items)) {
+        this.internalData.items = this.internalData.items.filter(child => child.name !== removedChild.name)
+      } else {
+        this.internalData.items = []
+      }
     },
     remove () {
-      this.$emit('removeMe', this.internalData)
+      this.$emit('remove-me', this.internalData)
     }
   },
   mounted () {

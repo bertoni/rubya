@@ -71,7 +71,7 @@ describe('ObjectTemplate.vue', () => {
     expect(wrapper.vm.internalData.name).toBe(name)
   })
 
-  it('should $emit removeMe in remove method', () => {
+  it('should $emit remove-me in remove method', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
@@ -80,7 +80,7 @@ describe('ObjectTemplate.vue', () => {
     })
     wrapper.vm.remove()
     expect(typeof wrapper.emitted()).toBe('object')
-    expect(typeof wrapper.emitted().removeMe).toBe('object')
+    expect(typeof wrapper.emitted()['remove-me']).toBe('object')
   })
 
   it('should change form state in edit method', () => {
@@ -147,7 +147,7 @@ describe('ObjectTemplate.vue', () => {
       }
     })
     let boolean01Structure = {
-      name: 'newfield',
+      name: 'foo',
       title: 'New Boolean field',
       id: '#newfield',
       description: 'Some new description'
@@ -159,6 +159,7 @@ describe('ObjectTemplate.vue', () => {
     expect(wrapper.vm.internalData.properties.length).toBe(1)
     wrapper.vm.removeChild(boolean01)
     expect(wrapper.vm.internalData.properties.length).toBe(0)
+    expect(wrapper.vm.internalData.required.length).toBe(0)
   })
 
   it('should change newchild state in newChild method', () => {
@@ -188,5 +189,44 @@ describe('ObjectTemplate.vue', () => {
     }
     wrapper.vm.addChild(new BooleanType(boolean01Structure))
     expect(wrapper.vm.internalData.properties.length).toBe(1)
+  })
+
+  it('should change specific child in childUpdated method', () => {
+    wrapper = shallowMount(ObjectTemplate, {
+      propsData: {
+        allowChangeName: true,
+        originalObject: new ObjectType(structure, name)
+      }
+    })
+    wrapper.vm.addChild(new ObjectType({
+      title: 'Other Object field',
+      id: '#otherfield',
+      description: 'Some description',
+      required: [],
+      additionalProperties: true,
+      minProperties: 5,
+      maxProperties: 6
+    }, 'foo'))
+    wrapper.vm.addChild(new ObjectType({
+      title: 'Other Object field',
+      id: '#otherfield',
+      description: 'Some description',
+      required: [],
+      additionalProperties: true,
+      minProperties: 1,
+      maxProperties: 2
+    }, 'baa'))
+    wrapper.vm.childUpdated(new ObjectType({
+      title: 'Other Object field',
+      id: '#otherfield',
+      description: 'Some description',
+      required: [],
+      additionalProperties: false,
+      minProperties: 10,
+      maxProperties: 15
+    }, 'foo'))
+    expect(wrapper.vm.internalData.properties[0].additionalProperties).toBe(false)
+    expect(wrapper.vm.internalData.properties[0].minProperties).toBe(10)
+    expect(wrapper.vm.internalData.properties[0].maxProperties).toBe(15)
   })
 })
