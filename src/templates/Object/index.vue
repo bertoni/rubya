@@ -73,28 +73,19 @@
 
 <script>
 import ObjectType from '../../DataStructure/ObjectType.js'
-import ObjectForm from './form.vue'
-import NewChild from '../NewChild.vue'
-import ObjectTemplate from './index.vue'
-import ArrayTemplate from '../Array/index.vue'
-import StringTemplate from '../String/index.vue'
-import IntegerTemplate from '../Integer/index.vue'
-import NumberTemplate from '../Number/index.vue'
-import BooleanTemplate from '../Boolean/index.vue'
-import FloatingMenu from '../../components/FloatingMenu.vue'
 
 export default {
   name: 'ObjectTemplate',
   components: {
-    ObjectForm,
-    NewChild,
-    ArrayTemplate,
-    ObjectTemplate,
-    StringTemplate,
-    IntegerTemplate,
-    NumberTemplate,
-    BooleanTemplate,
-    FloatingMenu
+    ObjectForm: () => import('./form.vue'),
+    NewChild: () => import('../NewChild.vue'),
+    ObjectTemplate: /* istanbul ignore next */() => import('./index.vue'),
+    ArrayTemplate: () => import('../Array/index.vue'),
+    StringTemplate: () => import('../String/index.vue'),
+    IntegerTemplate: () => import('../Integer/index.vue'),
+    NumberTemplate: () => import('../Number/index.vue'),
+    BooleanTemplate: () => import('../Boolean/index.vue'),
+    FloatingMenu: () => import('../../components/FloatingMenu.vue')
   },
   props: {
     allowChangeName: {

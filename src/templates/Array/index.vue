@@ -21,7 +21,7 @@
       @close="form = false"
       @change="update"
       />
-    <ul class="children unique" v-if="!Array.isArray(internalData.items) && internalData.items && Object.keys(internalData.items).length">
+    <ul class="children unique" v-if="hasListItems === 'object'">
       <ObjectTemplate
         v-if="internalData.items.type && internalData.items.type === 'object'"
         :originalObject="internalData.items"
@@ -65,7 +65,7 @@
         @change="childUpdated"
         />
     </ul>
-    <ul class="children multiple" v-if="Array.isArray(internalData.items) && internalData.items.length">
+    <ul class="children multiple" v-if="hasListItems === 'array'">
       <li v-for="(item, idx) in internalData.items" :key="item.name + '-' + idx">
         <ObjectTemplate
           v-if="item && item.type && item.type === 'object'"
@@ -123,28 +123,19 @@
 
 <script>
 import ArrayType from '../../DataStructure/ArrayType.js'
-import ArrayForm from './form.vue'
-import NewChild from '../NewChild.vue'
-import ObjectTemplate from '../Object/index.vue'
-import ArrayTemplate from './index.vue'
-import StringTemplate from '../String/index.vue'
-import IntegerTemplate from '../Integer/index.vue'
-import NumberTemplate from '../Number/index.vue'
-import BooleanTemplate from '../Boolean/index.vue'
-import FloatingMenu from '../../components/FloatingMenu.vue'
 
 export default {
   name: 'ArrayTemplate',
   components: {
-    ArrayForm,
-    NewChild,
-    ObjectTemplate,
-    ArrayTemplate,
-    StringTemplate,
-    IntegerTemplate,
-    NumberTemplate,
-    BooleanTemplate,
-    FloatingMenu
+    ArrayForm: () => import('./form.vue'),
+    NewChild: () => import('../NewChild.vue'),
+    ObjectTemplate: () => import('../Object/index.vue'),
+    ArrayTemplate: /* istanbul ignore next */() => import('./index.vue'),
+    StringTemplate: () => import('../String/index.vue'),
+    IntegerTemplate: () => import('../Integer/index.vue'),
+    NumberTemplate: () => import('../Number/index.vue'),
+    BooleanTemplate: () => import('../Boolean/index.vue'),
+    FloatingMenu: () => import('../../components/FloatingMenu.vue')
   },
   props: {
     allowChangeName: {
@@ -161,6 +152,13 @@ export default {
       form: false,
       newchild: false,
       internalData: {}
+    }
+  },
+  computed: {
+    hasListItems: function () {
+      if (!Array.isArray(this.internalData.items) && this.internalData.items && Object.keys(this.internalData.items).length) return 'object'
+      if (Array.isArray(this.internalData.items) && this.internalData.items.length) return 'array'
+      return false
     }
   },
   methods: {

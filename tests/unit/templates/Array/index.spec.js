@@ -1,6 +1,10 @@
 import { shallowMount } from '@vue/test-utils'
 import ArrayType from '@/DataStructure/ArrayType.js'
 import BooleanType from '@/DataStructure/BooleanType.js'
+import StringType from '@/DataStructure/StringType.js'
+import IntegerType from '@/DataStructure/IntegerType.js'
+import NumberType from '@/DataStructure/NumberType.js'
+import ObjectType from '@/DataStructure/ObjectType.js'
 import ArrayTemplate from '@/templates/Array/index.vue'
 
 let wrapper
@@ -271,6 +275,161 @@ describe('ArrayTemplate.vue', () => {
     }
     wrapper.vm.addChild(new BooleanType(boolean02Structure))
     expect(wrapper.vm.internalData.items.length).toBe(2)
+  })
+
+  it('should add new string child in addChild method with items with values', () => {
+    wrapper = shallowMount(ArrayTemplate, {
+      propsData: {
+        allowChangeName: true,
+        originalObject: new ArrayType(structure, name)
+      }
+    })
+    expect(wrapper.vm.internalData.items.length).toBe(0)
+    const newStructure = {
+      name: 'newfield',
+      title: 'New Array field',
+      id: '#newfield',
+      description: 'Some new description',
+      items: [],
+      additionalItems: true,
+      uniqueItems: true,
+      minItems: 2,
+      maxItems: 3
+    }
+    let arrayType = new ArrayType(newStructure, newStructure.name)
+    let stringStructure = {
+      title: 'New String field',
+      id: '#newfield',
+      description: 'Some new description'
+    }
+    let string = new StringType(stringStructure)
+    arrayType.items = string
+    wrapper.vm.update(arrayType)
+    expect(wrapper.vm.internalData.items).toBe(string)
+  })
+
+  it('should add new integer child in addChild method with items with values', () => {
+    wrapper = shallowMount(ArrayTemplate, {
+      propsData: {
+        allowChangeName: true,
+        originalObject: new ArrayType(structure, name)
+      }
+    })
+    expect(wrapper.vm.internalData.items.length).toBe(0)
+    const newStructure = {
+      name: 'newfield',
+      title: 'New Array field',
+      id: '#newfield',
+      description: 'Some new description',
+      items: [],
+      additionalItems: true,
+      uniqueItems: true,
+      minItems: 2,
+      maxItems: 3
+    }
+    let arrayType = new ArrayType(newStructure, newStructure.name)
+    let integerStructure = {
+      title: 'New Integer field',
+      id: '#newfield',
+      description: 'Some new description'
+    }
+    let integer = new IntegerType(integerStructure)
+    arrayType.items = integer
+    wrapper.vm.update(arrayType)
+    expect(wrapper.vm.internalData.items).toBe(integer)
+  })
+
+  it('should add new number child in addChild method with items with values', () => {
+    wrapper = shallowMount(ArrayTemplate, {
+      propsData: {
+        allowChangeName: true,
+        originalObject: new ArrayType(structure, name)
+      }
+    })
+    expect(wrapper.vm.internalData.items.length).toBe(0)
+    const newStructure = {
+      name: 'newfield',
+      title: 'New Array field',
+      id: '#newfield',
+      description: 'Some new description',
+      items: [],
+      additionalItems: true,
+      uniqueItems: true,
+      minItems: 2,
+      maxItems: 3
+    }
+    let arrayType = new ArrayType(newStructure, newStructure.name)
+    let numberStructure = {
+      title: 'New Number field',
+      id: '#newfield',
+      description: 'Some new description'
+    }
+    let number = new NumberType(numberStructure)
+    arrayType.items = number
+    wrapper.vm.update(arrayType)
+    expect(wrapper.vm.internalData.items).toBe(number)
+  })
+
+  it('should add new object child in addChild method with items with values', () => {
+    wrapper = shallowMount(ArrayTemplate, {
+      propsData: {
+        allowChangeName: true,
+        originalObject: new ArrayType(structure, name)
+      }
+    })
+    expect(wrapper.vm.internalData.items.length).toBe(0)
+    const newStructure = {
+      name: 'newfield',
+      title: 'New Array field',
+      id: '#newfield',
+      description: 'Some new description',
+      items: [],
+      additionalItems: true,
+      uniqueItems: true,
+      minItems: 2,
+      maxItems: 3
+    }
+    let arrayType = new ArrayType(newStructure, newStructure.name)
+    let objectStructure = {
+      title: 'New Object field',
+      id: '#newfield',
+      description: 'Some new description'
+    }
+    let object = new ObjectType(objectStructure)
+    arrayType.items = object
+    wrapper.vm.update(arrayType)
+    expect(wrapper.vm.internalData.items).toBe(object)
+  })
+
+  it('should add new array child in addChild method with items with values', () => {
+    wrapper = shallowMount(ArrayTemplate, {
+      propsData: {
+        allowChangeName: true,
+        originalObject: new ArrayType(structure, name)
+      }
+    })
+    expect(wrapper.vm.internalData.items.length).toBe(0)
+    const newStructure = {
+      name: 'newfield',
+      title: 'New Array field',
+      id: '#newfield',
+      description: 'Some new description',
+      items: [],
+      additionalItems: true,
+      uniqueItems: true,
+      minItems: 2,
+      maxItems: 3
+    }
+    let arrayType = new ArrayType(newStructure, newStructure.name)
+    let arrayStructure = {
+      title: 'New Array field',
+      id: '#newfield',
+      description: 'Some new description'
+    }
+    let array = new ArrayType(arrayStructure)
+    arrayType.items = array
+    wrapper.vm.update(arrayType)
+    expect(wrapper.vm.internalData.items).toBe(array)
   })
 
   it('should add new child in addChild method with items with one value', () => {
