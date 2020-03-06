@@ -123,19 +123,24 @@
 
 <script>
 import ArrayType from '../../DataStructure/ArrayType.js'
+import ArrayForm from './form.vue'
+import NewChild from '../NewChild.vue'
+import StringTemplate from '../String/index.vue'
+import IntegerTemplate from '../Integer/index.vue'
+import NumberTemplate from '../Number/index.vue'
+import BooleanTemplate from '../Boolean/index.vue'
+import FloatingMenu from '../../components/FloatingMenu.vue'
 
 export default {
   name: 'ArrayTemplate',
   components: {
-    ArrayForm: () => import('./form.vue'),
-    NewChild: () => import('../NewChild.vue'),
-    ObjectTemplate: () => import('../Object/index.vue'),
-    ArrayTemplate: /* istanbul ignore next */() => import('./index.vue'),
-    StringTemplate: () => import('../String/index.vue'),
-    IntegerTemplate: () => import('../Integer/index.vue'),
-    NumberTemplate: () => import('../Number/index.vue'),
-    BooleanTemplate: () => import('../Boolean/index.vue'),
-    FloatingMenu: () => import('../../components/FloatingMenu.vue')
+    ArrayForm,
+    NewChild,
+    StringTemplate,
+    IntegerTemplate,
+    NumberTemplate,
+    BooleanTemplate,
+    FloatingMenu
   },
   props: {
     allowChangeName: {
@@ -233,6 +238,10 @@ export default {
   },
   mounted () {
     this.internalData = this.originalObject
+  },
+  beforeCreate () {
+    this.$options.components.ObjectTemplate = require('../Object/index.vue').default
+    this.$options.components.ArrayTemplate = require('./index.vue').default
   }
 }
 </script>
