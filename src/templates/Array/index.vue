@@ -136,6 +136,8 @@ export default {
   components: {
     ArrayForm,
     NewChild,
+    ObjectTemplate: () => import('../Object/index.vue'),
+    ArrayTemplate: () => import('./index.vue'),
     StringTemplate,
     IntegerTemplate,
     NumberTemplate,
@@ -238,10 +240,6 @@ export default {
   },
   mounted () {
     this.internalData = this.originalObject
-  },
-  beforeCreate () {
-    this.$options.components.ObjectTemplate = require('../Object/index.vue').default
-    this.$options.components.ArrayTemplate = require('./index.vue').default
   }
 }
 </script>
