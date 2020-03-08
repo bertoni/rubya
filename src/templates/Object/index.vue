@@ -75,7 +75,6 @@
 import ObjectType from '../../DataStructure/ObjectType.js'
 import ObjectForm from './form.vue'
 import NewChild from '../NewChild.vue'
-import ArrayTemplate from '../Array/index.vue'
 import StringTemplate from '../String/index.vue'
 import IntegerTemplate from '../Integer/index.vue'
 import NumberTemplate from '../Number/index.vue'
@@ -87,7 +86,8 @@ export default {
   components: {
     ObjectForm,
     NewChild,
-    ArrayTemplate,
+    ObjectTemplate: () => import('./index.vue'),
+    ArrayTemplate: () => import('../Array/index.vue'),
     StringTemplate,
     IntegerTemplate,
     NumberTemplate,
@@ -152,9 +152,6 @@ export default {
   },
   mounted () {
     this.internalData = this.originalObject
-  },
-  beforeCreate () {
-    this.$options.components.ObjectTemplate = require('./index.vue').default
   }
 }
 </script>
