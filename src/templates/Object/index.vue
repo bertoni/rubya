@@ -86,7 +86,7 @@ export default {
   components: {
     ObjectForm,
     NewChild,
-    ObjectTemplate: () => import('./index.vue'),
+    ObjectTemplate: /* istanbul ignore next */() => import('./index.vue'),
     ArrayTemplate: () => import('../Array/index.vue'),
     StringTemplate,
     IntegerTemplate,
