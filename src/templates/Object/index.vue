@@ -87,7 +87,7 @@ export default {
     ObjectForm,
     NewChild,
     ObjectTemplate: /* istanbul ignore next */() => import('./index.vue'),
-    ArrayTemplate: () => import('../Array/index.vue'),
+    ArrayTemplate: /* istanbul ignore next */() => import('../Array/index.vue'),
     StringTemplate,
     IntegerTemplate,
     NumberTemplate,

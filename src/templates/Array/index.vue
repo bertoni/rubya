@@ -136,7 +136,7 @@ export default {
   components: {
     ArrayForm,
     NewChild,
-    ObjectTemplate: () => import('../Object/index.vue'),
+    ObjectTemplate: /* istanbul ignore next */() => import('../Object/index.vue'),
     ArrayTemplate: /* istanbul ignore next */() => import('./index.vue'),
     StringTemplate,
     IntegerTemplate,

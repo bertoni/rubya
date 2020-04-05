@@ -4,7 +4,6 @@ import BooleanType from '@/DataStructure/BooleanType.js'
 import StringType from '@/DataStructure/StringType.js'
 import IntegerType from '@/DataStructure/IntegerType.js'
 import NumberType from '@/DataStructure/NumberType.js'
-import ObjectType from '@/DataStructure/ObjectType.js'
 import ArrayTemplate from '@/templates/Array/index.vue'
 
 let wrapper
@@ -75,7 +74,7 @@ describe('ArrayTemplate.vue', () => {
     expect(wrapper.vm.internalData.name).toBe(name)
   })
 
-  it('should $emit remove-me in remove method', () => {
+  it('should $emit r emove-me in remove method', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
@@ -368,37 +367,6 @@ describe('ArrayTemplate.vue', () => {
     arrayType.items = number
     wrapper.vm.update(arrayType)
     expect(wrapper.vm.internalData.items).toBe(number)
-  })
-
-  it('should add new object child in addChild method with items with values', () => {
-    wrapper = shallowMount(ArrayTemplate, {
-      propsData: {
-        allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
-      }
-    })
-    expect(wrapper.vm.internalData.items.length).toBe(0)
-    const newStructure = {
-      name: 'newfield',
-      title: 'New Array field',
-      id: '#newfield',
-      description: 'Some new description',
-      items: [],
-      additionalItems: true,
-      uniqueItems: true,
-      minItems: 2,
-      maxItems: 3
-    }
-    let arrayType = new ArrayType(newStructure, newStructure.name)
-    let objectStructure = {
-      title: 'New Object field',
-      id: '#newfield',
-      description: 'Some new description'
-    }
-    let object = new ObjectType(objectStructure)
-    arrayType.items = object
-    wrapper.vm.update(arrayType)
-    expect(wrapper.vm.internalData.items).toBe(object)
   })
 
   it('should add new array child in addChild method with items with values', () => {

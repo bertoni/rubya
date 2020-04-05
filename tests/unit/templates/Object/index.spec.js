@@ -4,7 +4,6 @@ import BooleanType from '@/DataStructure/BooleanType.js'
 import NumberType from '@/DataStructure/NumberType.js'
 import IntegerType from '@/DataStructure/IntegerType.js'
 import StringType from '@/DataStructure/StringType.js'
-import ArrayType from '@/DataStructure/ArrayType.js'
 import ObjectTemplate from '@/templates/Object/index.vue'
 
 let wrapper
@@ -243,23 +242,6 @@ describe('ObjectTemplate.vue', () => {
       description: 'Some new description'
     }
     wrapper.vm.addChild(new StringType(stringStructure))
-    expect(wrapper.vm.internalData.properties.length).toBe(1)
-  })
-
-  it('should add new array child in addChild method', () => {
-    wrapper = shallowMount(ObjectTemplate, {
-      propsData: {
-        allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
-      }
-    })
-    expect(wrapper.vm.internalData.properties.length).toBe(0)
-    let arrayStructure = {
-      title: 'New Array field',
-      id: '#newfield',
-      description: 'Some new description'
-    }
-    wrapper.vm.addChild(new ArrayType(arrayStructure))
     expect(wrapper.vm.internalData.properties.length).toBe(1)
   })
 
