@@ -22,43 +22,7 @@
       @change="update"
       />
     <ul class="children unique" v-if="hasListItems === 'object'">
-      <ObjectTemplate
-        v-if="internalData.items.type && internalData.items.type === 'object'"
-        :originalObject="internalData.items"
-        :allowChangeName="false"
-        @remove-me="removeChild"
-        @change="childUpdated"
-        />
-      <ArrayTemplate
-        v-if="internalData.items.type && internalData.items.type === 'array'"
-        :originalObject="internalData.items"
-        :allowChangeName="false"
-        @remove-me="removeChild"
-        @change="childUpdated"
-        />
-      <StringTemplate
-        v-if="internalData.items.type && internalData.items.type === 'string'"
-        :originalObject="internalData.items"
-        :allowChangeName="false"
-        @remove-me="removeChild"
-        @change="childUpdated"
-        />
-      <IntegerTemplate
-        v-if="internalData.items.type && internalData.items.type === 'integer'"
-        :originalObject="internalData.items"
-        :allowChangeName="false"
-        @remove-me="removeChild"
-        @change="childUpdated"
-        />
-      <NumberTemplate
-        v-if="internalData.items.type && internalData.items.type === 'number'"
-        :originalObject="internalData.items"
-        :allowChangeName="false"
-        @remove-me="removeChild"
-        @change="childUpdated"
-        />
-      <BooleanTemplate
-        v-if="internalData.items.type && internalData.items.type === 'boolean'"
+      <Child
         :originalObject="internalData.items"
         :allowChangeName="false"
         @remove-me="removeChild"
@@ -67,43 +31,7 @@
     </ul>
     <ul class="children multiple" v-if="hasListItems === 'array'">
       <li v-for="(item, idx) in internalData.items" :key="item.name + '-' + idx">
-        <ObjectTemplate
-          v-if="item && item.type && item.type === 'object'"
-          :originalObject="item"
-          :allowChangeName="false"
-          @remove-me="removeChild"
-          @change="childUpdated"
-          />
-        <ArrayTemplate
-          v-if="item && item.type && item.type === 'array'"
-          :originalObject="item"
-          :allowChangeName="false"
-          @remove-me="removeChild"
-          @change="childUpdated"
-          />
-        <StringTemplate
-          v-if="item && item.type && item.type === 'string'"
-          :originalObject="item"
-          :allowChangeName="false"
-          @remove-me="removeChild"
-          @change="childUpdated"
-          />
-        <IntegerTemplate
-          v-if="item && item.type && item.type === 'integer'"
-          :originalObject="item"
-          :allowChangeName="false"
-          @remove-me="removeChild"
-          @change="childUpdated"
-          />
-        <NumberTemplate
-          v-if="item && item.type && item.type === 'number'"
-          :originalObject="item"
-          :allowChangeName="false"
-          @remove-me="removeChild"
-          @change="childUpdated"
-          />
-        <BooleanTemplate
-          v-if="item && item.type && item.type === 'boolean'"
+        <Child
           :originalObject="item"
           :allowChangeName="false"
           @remove-me="removeChild"
@@ -125,10 +53,7 @@
 import ArrayType from '../../DataStructure/ArrayType.js'
 import ArrayForm from './form.vue'
 import NewChild from '../NewChild.vue'
-import StringTemplate from '../String/index.vue'
-import IntegerTemplate from '../Integer/index.vue'
-import NumberTemplate from '../Number/index.vue'
-import BooleanTemplate from '../Boolean/index.vue'
+import Child from '../Child.vue'
 import FloatingMenu from '../../components/FloatingMenu.vue'
 
 export default {
@@ -136,12 +61,7 @@ export default {
   components: {
     ArrayForm,
     NewChild,
-    ObjectTemplate: () => import('../Object/index.vue'),
-    ArrayTemplate: /* istanbul ignore next */() => import('./index.vue'),
-    StringTemplate,
-    IntegerTemplate,
-    NumberTemplate,
-    BooleanTemplate,
+    Child,
     FloatingMenu
   },
   props: {

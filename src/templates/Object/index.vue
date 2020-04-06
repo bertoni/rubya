@@ -23,38 +23,7 @@
       />
     <ul class="children">
       <li v-for="(propertie, idx) in internalData.properties" :key="propertie.name + '-' + idx">
-        <ObjectTemplate
-          v-if="propertie && propertie.type && propertie.type === 'object'"
-          :originalObject="propertie"
-          @remove-me="removeChild"
-          @change="childUpdated"
-          />
-        <ArrayTemplate
-          v-if="propertie && propertie.type && propertie.type === 'array'"
-          :originalObject="propertie"
-          @remove-me="removeChild"
-          @change="childUpdated"
-          />
-        <StringTemplate
-          v-if="propertie && propertie.type && propertie.type === 'string'"
-          :originalObject="propertie"
-          @remove-me="removeChild"
-          @change="childUpdated"
-          />
-        <IntegerTemplate
-          v-if="propertie && propertie.type && propertie.type === 'integer'"
-          :originalObject="propertie"
-          @remove-me="removeChild"
-          @change="childUpdated"
-          />
-        <NumberTemplate
-          v-if="propertie && propertie.type && propertie.type === 'number'"
-          :originalObject="propertie"
-          @remove-me="removeChild"
-          @change="childUpdated"
-          />
-        <BooleanTemplate
-          v-if="propertie && propertie.type && propertie.type === 'boolean'"
+        <Child
           :originalObject="propertie"
           @remove-me="removeChild"
           @change="childUpdated"
@@ -75,24 +44,16 @@
 import ObjectType from '../../DataStructure/ObjectType.js'
 import ObjectForm from './form.vue'
 import NewChild from '../NewChild.vue'
-import StringTemplate from '../String/index.vue'
-import IntegerTemplate from '../Integer/index.vue'
-import NumberTemplate from '../Number/index.vue'
-import BooleanTemplate from '../Boolean/index.vue'
+import Child from '../Child.vue'
 import FloatingMenu from '../../components/FloatingMenu.vue'
 
 export default {
   name: 'ObjectTemplate',
   components: {
     ObjectForm,
+    FloatingMenu,
     NewChild,
-    ObjectTemplate: /* istanbul ignore next */() => import('./index.vue'),
-    ArrayTemplate: () => import('../Array/index.vue'),
-    StringTemplate,
-    IntegerTemplate,
-    NumberTemplate,
-    BooleanTemplate,
-    FloatingMenu
+    Child
   },
   props: {
     allowChangeName: {

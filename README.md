@@ -118,5 +118,13 @@ For the fields types object and array, have more one option:
 Child fields will always be identified after their parents
 
 
+## Test your project with Jest
+
+If you are receiving error "`SyntaxError: Cannot use import statement outside a module`" when testing your project with Jest, add this statement inside your `jest.config.js`:
+````
+transformIgnorePatterns: ['/node_modules/(?!rubya)/']
+````
+
+
 ## LICENSE
 MIT

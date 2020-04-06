@@ -17,7 +17,7 @@ export default {
   ],
   plugins: [
     commonjs({
-      sourceMap: false,
+      sourceMap: false
     }),
     vue({
       css: true,
