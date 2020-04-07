@@ -1,10 +1,11 @@
 {
   "name": "rubya",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Project destined to create json schema of visual form in vue.js",
-  "main": "dist/rubya.umd.js",
-  "module": "dist/rubya.esm.js",
-  "unpkg": "dist/rubya.min.js",
+  "main": "dist/rubya.esm.js",
+  "_main": "dist/rubya.umd.js",
+  "_module": "dist/rubya.esm.js",
+  "_unpkg": "dist/rubya.min.js",
   "browser": {
     "./sfc": "src/index.vue"
   },
