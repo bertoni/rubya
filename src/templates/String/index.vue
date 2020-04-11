@@ -2,10 +2,11 @@
   <div class="child-template string-template">
     <div v-if="!form">
       <p>
-        <span class="name">{{ internalData.name }}</span> (<span class="type">string</span>): <span class="title">{{ internalData.title || 'No title' }}</span> | <span class="id">{{ internalData.id || 'No identification' }}</span>
+        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('string') }}</span>): <span class="title">{{ internalData.title || translate('No title') }}</span> | <span class="id">{{ internalData.id || translate('No identification') }}</span>
       </p>
-      <p>{{ internalData.description || 'No description' }}</p>
-      <p>Minimum length: {{ showNumber(internalData.minLength) }}, Maximum length: {{ showNumber(internalData.maxLength) }}, Pattern: {{ internalData.pattern || '-' }}, Format: {{ internalData.format || '-' }}</p>
+      <p>{{ internalData.description || translate('No description') }}</p>
+      <p>{{ translate('Minimum length') }}: {{ showNumber(internalData.minLength) }}, {{ translate('Maximum length') }}: {{ showNumber(internalData.maxLength) }},
+        {{ translate('Pattern') }}: {{ internalData.pattern || '-' }}, {{ translate('Format') }}: {{ internalData.format || '-' }}</p>
       <FloatingMenu
         :showEdit="true"
         :showAdd="false"
@@ -17,6 +18,7 @@
       v-if="form"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @close="form = false"
       @change="update"
       />
@@ -38,6 +40,10 @@ export default {
     allowChangeName: {
       type: Boolean,
       default: () => true
+    },
+    translate: {
+      type: Function,
+      required: true
     },
     originalObject: {
       type: StringType,

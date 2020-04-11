@@ -31,7 +31,8 @@ describe('StringForm.vue', () => {
     wrapper = shallowMount(StringForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new StringType(structure, name)
+        originalObject: new StringType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('StringForm')
@@ -49,7 +50,8 @@ describe('StringForm.vue', () => {
   it('should renders correctly component with default values', () => {
     wrapper = shallowMount(StringForm, {
       propsData: {
-        originalObject: new StringType(structure, name)
+        originalObject: new StringType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('StringForm')
@@ -68,7 +70,8 @@ describe('StringForm.vue', () => {
     wrapper = shallowMount(StringForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new StringType(structure, name)
+        originalObject: new StringType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.cancel()
@@ -80,7 +83,8 @@ describe('StringForm.vue', () => {
     wrapper = shallowMount(StringForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new StringType(structure, '')
+        originalObject: new StringType(structure, ''),
+        translate: text => text
       }
     })
     expect(wrapper.vm.save()).toBeFalsy()
@@ -91,7 +95,8 @@ describe('StringForm.vue', () => {
     wrapper = shallowMount(StringForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new StringType(structure, name)
+        originalObject: new StringType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.save()

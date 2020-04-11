@@ -32,7 +32,8 @@ describe('NumberForm.vue', () => {
     wrapper = shallowMount(NumberForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new NumberType(structure, name)
+        originalObject: new NumberType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('NumberForm')
@@ -51,7 +52,8 @@ describe('NumberForm.vue', () => {
   it('should renders correctly component with default values', () => {
     wrapper = shallowMount(NumberForm, {
       propsData: {
-        originalObject: new NumberType(structure, name)
+        originalObject: new NumberType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('NumberForm')
@@ -71,7 +73,8 @@ describe('NumberForm.vue', () => {
     wrapper = shallowMount(NumberForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new NumberType(structure, name)
+        originalObject: new NumberType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.cancel()
@@ -83,7 +86,8 @@ describe('NumberForm.vue', () => {
     wrapper = shallowMount(NumberForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new NumberType(structure, '')
+        originalObject: new NumberType(structure, ''),
+        translate: text => text
       }
     })
     expect(wrapper.vm.save()).toBeFalsy()
@@ -94,7 +98,8 @@ describe('NumberForm.vue', () => {
     wrapper = shallowMount(NumberForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new NumberType(structure, name)
+        originalObject: new NumberType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.save()

@@ -36,7 +36,8 @@ describe('IntegerTemplate.vue', () => {
     wrapper = shallowMount(IntegerTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new IntegerType(structure, name)
+        originalObject: new IntegerType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('IntegerTemplate')
@@ -55,7 +56,8 @@ describe('IntegerTemplate.vue', () => {
   it('should renders correctly component with default values', () => {
     wrapper = shallowMount(IntegerTemplate, {
       propsData: {
-        originalObject: new IntegerType(structure, name)
+        originalObject: new IntegerType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('IntegerTemplate')
@@ -75,7 +77,8 @@ describe('IntegerTemplate.vue', () => {
     wrapper = shallowMount(IntegerTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new IntegerType(structure, name)
+        originalObject: new IntegerType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.remove()
@@ -87,7 +90,8 @@ describe('IntegerTemplate.vue', () => {
     wrapper = shallowMount(IntegerTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new IntegerType(structure, name)
+        originalObject: new IntegerType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.form).toBeFalsy()
@@ -110,7 +114,8 @@ describe('IntegerTemplate.vue', () => {
     wrapper = shallowMount(IntegerTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new IntegerType(structure, name)
+        originalObject: new IntegerType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.form).toBeFalsy()

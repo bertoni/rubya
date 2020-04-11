@@ -1,6 +1,6 @@
 {
   "name": "rubya",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Project destined to create json schema of visual form in vue.js",
   "main": "dist/rubya.esm.js",
   "_main": "dist/rubya.umd.js",
@@ -51,6 +51,7 @@
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-eslint": "^10.0.3",
+    "babel-plugin-inline-json-import": "^0.3.2",
     "chromedriver": "^78.0.1",
     "core-js": "^3.4.4",
     "eslint": "^5.16.0",

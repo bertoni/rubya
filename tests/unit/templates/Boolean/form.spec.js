@@ -27,7 +27,8 @@ describe('BooleanForm.vue', () => {
     wrapper = shallowMount(BooleanForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new BooleanType(structure, name)
+        originalObject: new BooleanType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('BooleanForm')
@@ -41,7 +42,8 @@ describe('BooleanForm.vue', () => {
   it('should renders correctly component with default values', () => {
     wrapper = shallowMount(BooleanForm, {
       propsData: {
-        originalObject: new BooleanType(structure, name)
+        originalObject: new BooleanType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('BooleanForm')
@@ -56,7 +58,8 @@ describe('BooleanForm.vue', () => {
     wrapper = shallowMount(BooleanForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new BooleanType(structure, name)
+        originalObject: new BooleanType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.cancel()
@@ -68,7 +71,8 @@ describe('BooleanForm.vue', () => {
     wrapper = shallowMount(BooleanForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new BooleanType(structure, '')
+        originalObject: new BooleanType(structure, ''),
+        translate: text => text
       }
     })
     expect(wrapper.vm.save()).toBeFalsy()
@@ -79,7 +83,8 @@ describe('BooleanForm.vue', () => {
     wrapper = shallowMount(BooleanForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new BooleanType(structure, name)
+        originalObject: new BooleanType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.save()

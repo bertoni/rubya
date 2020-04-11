@@ -40,7 +40,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('ObjectTemplate')
@@ -59,7 +60,8 @@ describe('ObjectTemplate.vue', () => {
   it('should renders correctly component with default values', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('ObjectTemplate')
@@ -79,7 +81,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.remove()
@@ -91,7 +94,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.form).toBeFalsy()
@@ -113,7 +117,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.form).toBeFalsy()
@@ -147,7 +152,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     let boolean01Structure = {
@@ -170,7 +176,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.newchild).toBeFalsy()
@@ -182,7 +189,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.properties.length).toBe(0)
@@ -199,7 +207,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.properties.length).toBe(0)
@@ -216,7 +225,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.properties.length).toBe(0)
@@ -233,7 +243,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.properties.length).toBe(0)
@@ -250,7 +261,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.properties.length).toBe(0)
@@ -267,7 +279,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.properties.length).toBe(0)
@@ -284,7 +297,8 @@ describe('ObjectTemplate.vue', () => {
     wrapper = shallowMount(ObjectTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.addChild(new ObjectType({

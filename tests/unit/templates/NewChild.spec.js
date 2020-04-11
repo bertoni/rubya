@@ -24,7 +24,8 @@ describe('NewChild.vue', () => {
   it('should renders correctly component', () => {
     wrapper = shallowMount(NewChild, {
       propsData: {
-        allowChangeName: true
+        allowChangeName: true,
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('NewChild')
@@ -34,7 +35,9 @@ describe('NewChild.vue', () => {
 
   it('should renders correctly component with default values', () => {
     wrapper = shallowMount(NewChild, {
-      propsData: {}
+      propsData: {
+        translate: text => text
+      }
     })
     expect(wrapper.name()).toBe('NewChild')
     expect(wrapper.vm.type).toBe(null)
@@ -44,7 +47,8 @@ describe('NewChild.vue', () => {
   it('should change internalData and type state in changeType method', () => {
     wrapper = shallowMount(NewChild, {
       propsData: {
-        allowChangeName: true
+        allowChangeName: true,
+        translate: text => text
       }
     })
     wrapper.vm.changeType('boolean')
@@ -55,7 +59,8 @@ describe('NewChild.vue', () => {
   it('should $emit close in cancel method', () => {
     wrapper = shallowMount(NewChild, {
       propsData: {
-        allowChangeName: true
+        allowChangeName: true,
+        translate: text => text
       }
     })
     wrapper.vm.changeType('boolean')
@@ -71,7 +76,8 @@ describe('NewChild.vue', () => {
   it('should $emit save in save method', () => {
     wrapper = shallowMount(NewChild, {
       propsData: {
-        allowChangeName: true
+        allowChangeName: true,
+        translate: text => text
       }
     })
     wrapper.vm.changeType('boolean')

@@ -4,6 +4,7 @@
       v-if="internalData && internalData.type && internalData.type === 'object'"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @remove-me="remove"
       @change="update"
     />
@@ -11,6 +12,7 @@
       v-if="internalData && internalData.type && internalData.type === 'array'"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @remove-me="remove"
       @change="update"
     />
@@ -18,6 +20,7 @@
       v-if="internalData && internalData.type && internalData.type === 'string'"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @remove-me="remove"
       @change="update"
     />
@@ -25,6 +28,7 @@
       v-if="internalData && internalData.type && internalData.type === 'integer'"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @remove-me="remove"
       @change="update"
     />
@@ -32,6 +36,7 @@
       v-if="internalData && internalData.type && internalData.type === 'number'"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @remove-me="remove"
       @change="update"
     />
@@ -39,6 +44,7 @@
       v-if="internalData && internalData.type && internalData.type === 'boolean'"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @remove-me="remove"
       @change="update"
     />
@@ -60,6 +66,10 @@ export default {
     allowChangeName: {
       type: Boolean,
       default: () => true
+    },
+    translate: {
+      type: Function,
+      required: true
     },
     originalObject: {
       type: Object,

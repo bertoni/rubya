@@ -103,6 +103,73 @@ updatedSchema (schema) {
 }
 ```
 
+## Internationalization
+You can use the Rubya in any language that you want.
+There are two options, specify the language that has all translations or provide your own translation.
+#### Using default language (only available in "pt-br" for now, I will love more translates by pull requests S2)
+``` javascript
+<template>
+  <div id="app">
+    <Rubya
+      ref="Rubya"
+      :schema="schema"
+      :language="language"
+      @updated-schema="updatedSchema" />
+  </div>
+</template>
+
+<script>
+import Rubya from 'rubya'
+
+export default {
+  ...
+  data () {
+    return {
+      schema: {
+        ...,
+        language: 'pt-br'
+      }
+    }
+  },
+  ...
+}
+</script>
+```
+
+#### Using your translate
+``` javascript
+<template>
+  <div id="app">
+    <Rubya
+      ref="Rubya"
+      :schema="schema"
+      :i18n="i18n"
+      @updated-schema="updatedSchema" />
+  </div>
+</template>
+
+<script>
+import Rubya from 'rubya'
+
+export default {
+  ...
+  data () {
+    return {
+      schema: {
+        ...,
+        i18n: {
+          'some text': 'your translate to "some text"'
+        }
+      }
+    }
+  },
+  ...
+}
+</script>
+```
+
+Obs: You can combine these two options, using one default language and override some text with your translate. The i18n has priority and will override the language specified. If you provide these two, it is not necessary translate all texts, all default language will be used, except your own translate.
+
 ## How works
 ![Rubya screen](assets/screen.png "Rubya screen")
 

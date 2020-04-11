@@ -2,10 +2,12 @@
   <div class="child-template number-template">
     <div v-if="!form">
       <p>
-        <span class="name">{{ internalData.name }}</span> (<span class="type">number</span>): <span class="title">{{ internalData.title || 'No title' }}</span> | <span class="id">{{ internalData.id || 'No identification' }}</span>
+        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('number') }}</span>): <span class="title">{{ internalData.title || translate('No title') }}</span> | <span class="id">{{ internalData.id || translate('No identification') }}</span>
       </p>
-      <p>{{ internalData.description || 'No description' }}</p>
-      <p>Multiple of: {{ showNumber(internalData.multipleOf) }}, Minimum or equal: {{ showNumber(internalData.minimum) }}, Minimum: {{ showNumber(internalData.exclusiveMinimum) }}, Maximum or equal: {{ showNumber(internalData.maximum) }}, Maximum: {{ showNumber(internalData.exclusiveMaximum) }}</p>
+      <p>{{ internalData.description || translate('No description') }}</p>
+      <p>{{ translate('Multiple of') }}: {{ showNumber(internalData.multipleOf) }}, {{ translate('Minimum or equal') }}: {{ showNumber(internalData.minimum) }},
+        {{ translate('Minimum') }}: {{ showNumber(internalData.exclusiveMinimum) }}, {{ translate('Maximum or equal') }}: {{ showNumber(internalData.maximum) }},
+        {{ translate('Maximum') }}: {{ showNumber(internalData.exclusiveMaximum) }}</p>
       <FloatingMenu
         :showEdit="true"
         :showAdd="false"
@@ -17,6 +19,7 @@
       v-if="form"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @close="form = false"
       @change="update"
       />
@@ -38,6 +41,10 @@ export default {
     allowChangeName: {
       type: Boolean,
       default: () => true
+    },
+    translate: {
+      type: Function,
+      required: true
     },
     originalObject: {
       type: NumberType,
