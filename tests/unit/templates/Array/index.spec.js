@@ -40,7 +40,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('ArrayTemplate')
@@ -59,7 +60,8 @@ describe('ArrayTemplate.vue', () => {
   it('should renders correctly component with default values', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('ArrayTemplate')
@@ -79,7 +81,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.remove()
@@ -91,7 +94,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.form).toBeFalsy()
@@ -113,7 +117,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.form).toBeFalsy()
@@ -146,7 +151,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     let boolean01 = new BooleanType({
@@ -193,7 +199,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     let boolean01Structure = {
@@ -215,7 +222,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.newchild).toBeFalsy()
@@ -227,7 +235,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.items.length).toBe(0)
@@ -244,7 +253,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.items.length).toBe(0)
@@ -281,7 +291,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.items.length).toBe(0)
@@ -312,7 +323,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.items.length).toBe(0)
@@ -343,7 +355,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.items.length).toBe(0)
@@ -374,7 +387,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.items.length).toBe(0)
@@ -405,7 +419,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.items.length).toBe(0)
@@ -436,7 +451,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: false,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.vm.internalData.items.length).toBe(0)
@@ -460,7 +476,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     let boolean01 = new BooleanType({
@@ -481,7 +498,8 @@ describe('ArrayTemplate.vue', () => {
     wrapper = shallowMount(ArrayTemplate, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.addChild(new BooleanType({

@@ -1,49 +1,49 @@
 <template>
   <div class="form-template">
-    <h3>Array</h3>
+    <h3>{{ translate('Array') }}</h3>
     <form class="form-object" @submit.prevent="save">
       <fieldset v-if="allowChangeName">
-        <label for="name" class="fieldplaceholder">Name</label>
+        <label for="name" class="fieldplaceholder">{{ translate('Name') }}</label>
         <input type="text" name="name" id="name" v-model="internalData.name" :class="(fieldsWithError.name ? 'error' : '')" />
       </fieldset>
       <fieldset>
-        <label for="description" class="fieldplaceholder">Description</label>
+        <label for="description" class="fieldplaceholder">{{ translate('Description') }}</label>
         <textarea name="description" id="description" v-model="internalData.description"></textarea>
       </fieldset>
       <fieldset>
-        <label for="id" class="fieldplaceholder">Identification</label>
+        <label for="id" class="fieldplaceholder">{{ translate('Identification') }}</label>
         <input type="text" name="id" id="id" v-model="internalData.id" />
       </fieldset>
       <fieldset>
-        <label for="title" class="fieldplaceholder">Title</label>
+        <label for="title" class="fieldplaceholder">{{ translate('Title') }}</label>
         <input type="text" name="title" id="title" v-model="internalData.title" />
       </fieldset>
       <fieldset>
-        <label for="additionalItems" class="fieldplaceholder">Allow additional items</label>
+        <label for="additionalItems" class="fieldplaceholder">{{ translate('Allow additional items') }}</label>
         <select name="additionalItems" id="additionalItems" v-model="internalData.additionalItems">
-          <option :value="true">Yes</option>
-          <option :value="false">No</option>
+          <option :value="true">{{ translate('Yes') }}</option>
+          <option :value="false">{{ translate('No') }}</option>
         </select>
       </fieldset>
       <fieldset>
-        <label for="uniqueItems" class="fieldplaceholder">Unique items</label>
+        <label for="uniqueItems" class="fieldplaceholder">{{ translate('Unique items') }}</label>
         <select name="uniqueItems" id="uniqueItems" v-model="internalData.uniqueItems">
-          <option :value="true">Yes</option>
-          <option :value="false">No</option>
+          <option :value="true">{{ translate('Yes') }}</option>
+          <option :value="false">{{ translate('No') }}</option>
         </select>
       </fieldset>
       <fieldset>
-        <label for="minItems" class="fieldplaceholder">Minimum items</label>
+        <label for="minItems" class="fieldplaceholder">{{ translate('Minimum items') }}</label>
         <input type="number" name="minItems" id="minItems" v-model.number="internalData.minItems" />
       </fieldset>
       <fieldset>
-        <label for="maxItems" class="fieldplaceholder">Maximum items</label>
+        <label for="maxItems" class="fieldplaceholder">{{ translate('Maximum items') }}</label>
         <input type="number" name="maxItems" id="maxItems" v-model.number="internalData.maxItems" />
       </fieldset>
     </form>
     <div class="control-form">
-      <button class="save" @click.prevent="save">save</button>
-      <button class="cancel" @click.prevent="cancel">cancel</button>
+      <button class="save" @click.prevent="save">{{ translate('save') }}</button>
+      <button class="cancel" @click.prevent="cancel">{{ translate('cancel') }}</button>
     </div>
   </div>
 </template>
@@ -57,6 +57,10 @@ export default {
     allowChangeName: {
       type: Boolean,
       default: () => true
+    },
+    translate: {
+      type: Function,
+      required: true
     },
     originalObject: {
       type: ArrayType,

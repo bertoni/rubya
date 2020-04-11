@@ -3,6 +3,7 @@
     v-if="tree !== null"
     :originalObject="tree"
     :allowChangeName="false"
+    :translate="translate"
     @remove-me="removeChild"
     @change="childUpdated"
     />
@@ -11,6 +12,7 @@
 <script>
 import DataStructureFactory from './DataStructure/DataStructureFactory.js'
 import ObjectTemplate from './templates/Object/index.vue'
+import i18nOptions from './i18n/index'
 
 export default {
   name: 'Rubya',
@@ -18,6 +20,16 @@ export default {
     ObjectTemplate
   },
   props: {
+    i18n: {
+      type: Object,
+      required: false,
+      default: () => {
+        return {}
+      }
+    },
+    language: {
+      type: String
+    },
     schema: {
       type: Object,
       default: () => {
@@ -35,10 +47,14 @@ export default {
   },
   data () {
     return {
-      tree: null
+      tree: null,
+      dataTranslate: {}
     }
   },
   methods: {
+    translate (text) {
+      return this.dataTranslate[text] || text
+    },
     getJsonSchema () {
       this.$emit('updated-schema', this.tree.toJson())
     },
@@ -54,6 +70,8 @@ export default {
   },
   mounted () {
     this.generateTreeFromSchema(this.schema)
+    if (this.language && this.language.length && i18nOptions[this.language]) this.dataTranslate = i18nOptions[this.language]
+    if (this.i18n && Object.keys(this.i18n).length) this.dataTranslate = { ...this.dataTranslate, ...this.i18n }
   }
 }
 </script>

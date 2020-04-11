@@ -2,10 +2,12 @@
   <div class="child-template object-template">
     <div v-if="!form">
       <p>
-        <span class="name">{{ internalData.name }}</span> (<span class="type">object</span>): <span class="title">{{ internalData.title || 'No title' }}</span> | <span class="id">{{ internalData.id || 'No identification' }}</span>
+        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('object') }}</span>): <span class="title">{{ internalData.title || translate('No title') }}</span> | <span class="id">{{ internalData.id || translate('No identification') }}</span>
       </p>
       <p>{{ internalData.description || 'No description' }}</p>
-      <p>Additional properties: {{ internalData.additionalProperties ? 'Yes' : 'No' }}, Minimum properties: {{ showNumber(internalData.minProperties) }}, Maximum properties: {{ showNumber(internalData.maxProperties) }}, Required children: {{ internalData.required || '-' }}</p>
+      <p>{{ translate('Additional properties') }}: {{ internalData.additionalProperties ? translate('Yes') : translate('No') }},
+        {{ translate('Minimum properties') }}: {{ showNumber(internalData.minProperties) }}, {{ translate('Maximum properties') }}: {{ showNumber(internalData.maxProperties) }},
+        {{ translate('Required children') }}: {{ internalData.required || '-' }}</p>
       <FloatingMenu
         :showEdit="true"
         :showAdd="true"
@@ -18,6 +20,7 @@
       v-if="form"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @close="form = false"
       @change="update"
       />
@@ -25,6 +28,7 @@
       <li v-for="(propertie, idx) in internalData.properties" :key="propertie.name + '-' + idx">
         <Child
           :originalObject="propertie"
+          :translate="translate"
           @remove-me="removeChild"
           @change="childUpdated"
           />
@@ -34,6 +38,7 @@
       v-show="newchild"
       ref="formNewChild"
       :allowChangeName="true"
+      :translate="translate"
       @close="newchild = false"
       @save="addChild"
       />
@@ -59,6 +64,10 @@ export default {
     allowChangeName: {
       type: Boolean,
       default: () => true
+    },
+    translate: {
+      type: Function,
+      required: true
     },
     originalObject: {
       type: ObjectType,

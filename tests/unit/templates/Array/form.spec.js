@@ -31,7 +31,8 @@ describe('ArrayForm.vue', () => {
     wrapper = shallowMount(ArrayForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('ArrayForm')
@@ -49,7 +50,8 @@ describe('ArrayForm.vue', () => {
   it('should renders correctly component with default values', () => {
     wrapper = shallowMount(ArrayForm, {
       propsData: {
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('ArrayForm')
@@ -68,7 +70,8 @@ describe('ArrayForm.vue', () => {
     wrapper = shallowMount(ArrayForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.cancel()
@@ -80,7 +83,8 @@ describe('ArrayForm.vue', () => {
     wrapper = shallowMount(ArrayForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, '')
+        originalObject: new ArrayType(structure, ''),
+        translate: text => text
       }
     })
     expect(wrapper.vm.save()).toBeFalsy()
@@ -91,7 +95,8 @@ describe('ArrayForm.vue', () => {
     wrapper = shallowMount(ArrayForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ArrayType(structure, name)
+        originalObject: new ArrayType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.save()

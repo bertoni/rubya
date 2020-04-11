@@ -32,7 +32,8 @@ describe('ObjectForm.vue', () => {
     wrapper = shallowMount(ObjectForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('ObjectForm')
@@ -52,7 +53,8 @@ describe('ObjectForm.vue', () => {
   it('should renders correctly component with default values', () => {
     wrapper = shallowMount(ObjectForm, {
       propsData: {
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     expect(wrapper.name()).toBe('ObjectForm')
@@ -73,7 +75,8 @@ describe('ObjectForm.vue', () => {
     wrapper = shallowMount(ObjectForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.cancel()
@@ -85,7 +88,8 @@ describe('ObjectForm.vue', () => {
     wrapper = shallowMount(ObjectForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, '')
+        originalObject: new ObjectType(structure, ''),
+        translate: text => text
       }
     })
     expect(wrapper.vm.save()).toBeFalsy()
@@ -96,7 +100,8 @@ describe('ObjectForm.vue', () => {
     wrapper = shallowMount(ObjectForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name)
+        originalObject: new ObjectType(structure, name),
+        translate: text => text
       }
     })
     wrapper.vm.save()
@@ -135,7 +140,8 @@ describe('ObjectForm.vue', () => {
     wrapper = shallowMount(ObjectForm, {
       propsData: {
         allowChangeName: true,
-        originalObject: objectType
+        originalObject: objectType,
+        translate: text => text
       }
     })
     wrapper.vm.requiredChildren = ['foo', 'baa']

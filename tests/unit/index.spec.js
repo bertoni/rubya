@@ -26,6 +26,10 @@ describe('index.vue', () => {
     expect(typeof Rubya.methods.childUpdated).toBe('function')
   })
 
+  it('should have a translate method', () => {
+    expect(typeof Rubya.methods.translate).toBe('function')
+  })
+
   it('should renders correctly component', () => {
     wrapper = shallowMount(Rubya, {
       propsData: {
@@ -47,6 +51,16 @@ describe('index.vue', () => {
   it('should renders correctly component with default values', () => {
     wrapper = shallowMount(Rubya, {
       propsData: {}
+    })
+    expect(wrapper.name()).toBe('Rubya')
+    expect(wrapper.vm.tree instanceof ObjectType).toBeTruthy()
+  })
+
+  it('should renders correctly component with invalid language', () => {
+    wrapper = shallowMount(Rubya, {
+      propsData: {
+        language: 'xp-to'
+      }
     })
     expect(wrapper.name()).toBe('Rubya')
     expect(wrapper.vm.tree instanceof ObjectType).toBeTruthy()
@@ -98,5 +112,36 @@ describe('index.vue', () => {
     expect(wrapper.vm.tree.properties.length).toBe(0)
     wrapper.vm.childUpdated(objectType)
     expect(wrapper.vm.tree.properties.length).toBe(1)
+  })
+
+  it('should return translate text in translate method', () => {
+    wrapper = shallowMount(Rubya, {
+      propsData: {
+        i18n: {
+          'foo': 'baa'
+        }
+      }
+    })
+    expect(wrapper.vm.translate('foo')).toBe('baa')
+  })
+
+  it('should return default text in translate method', () => {
+    wrapper = shallowMount(Rubya, {
+      propsData: {}
+    })
+    expect(wrapper.vm.translate('foo')).toBe('foo')
+  })
+
+  it('should return override text in translate method', () => {
+    wrapper = shallowMount(Rubya, {
+      propsData: {
+        language: 'pt-br',
+        i18n: {
+          'texto': 'perfect!'
+        }
+      }
+    })
+    expect(wrapper.vm.translate('number')).toBe('número')
+    expect(wrapper.vm.translate('texto')).toBe('perfect!')
   })
 })

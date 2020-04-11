@@ -1,17 +1,18 @@
 <template>
   <div class="new-child">
     <form class="options">
-      <label><input ref="booleanElement" type="radio" name="type" value="boolean" @change="changeType('boolean')" /> Boolean</label>
-      <label><input ref="stringElement" type="radio" name="type" value="string" @change="changeType('string')" /> String</label>
-      <label><input ref="integerElement" type="radio" name="type" value="integer" @change="changeType('integer')" /> Integer</label>
-      <label><input ref="numberElement" type="radio" name="type" value="number" @change="changeType('number')" /> Number</label>
-      <label><input ref="objectElement" type="radio" name="type" value="object" @change="changeType('object')" /> Object</label>
-      <label><input ref="arrayElement" type="radio" name="type" value="array" @change="changeType('array')" /> Array</label>
+      <label><input ref="booleanElement" type="radio" name="type" value="boolean" @change="changeType('boolean')" /> {{ translate('Boolean') }}</label>
+      <label><input ref="stringElement" type="radio" name="type" value="string" @change="changeType('string')" /> {{ translate('String') }}</label>
+      <label><input ref="integerElement" type="radio" name="type" value="integer" @change="changeType('integer')" /> {{ translate('Integer') }}</label>
+      <label><input ref="numberElement" type="radio" name="type" value="number" @change="changeType('number')" /> {{ translate('Number') }}</label>
+      <label><input ref="objectElement" type="radio" name="type" value="object" @change="changeType('object')" /> {{ translate('Object') }}</label>
+      <label><input ref="arrayElement" type="radio" name="type" value="array" @change="changeType('array')" /> {{ translate('Array') }}</label>
     </form>
     <BooleanForm
       v-if="type === 'boolean'"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @close="cancel"
       @change="save"
       />
@@ -19,6 +20,7 @@
       v-if="type === 'string'"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @close="cancel"
       @change="save"
       />
@@ -26,6 +28,7 @@
       v-if="type === 'integer'"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @close="cancel"
       @change="save"
       />
@@ -33,6 +36,7 @@
       v-if="type === 'number'"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @close="cancel"
       @change="save"
       />
@@ -40,6 +44,7 @@
       v-if="type === 'object'"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @close="cancel"
       @change="save"
       />
@@ -47,6 +52,7 @@
       v-if="type === 'array'"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @close="cancel"
       @change="save"
       />
@@ -76,6 +82,10 @@ export default {
     allowChangeName: {
       type: Boolean,
       default: () => true
+    },
+    translate: {
+      type: Function,
+      required: true
     }
   },
   data () {

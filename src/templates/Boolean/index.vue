@@ -2,9 +2,9 @@
   <div class="child-template boolean-template">
     <div v-if="!form">
       <p>
-        <span class="name">{{ internalData.name }}</span> (<span class="type">boolean</span>): <span class="title">{{ internalData.title || 'No title' }}</span> | <span class="id">{{ internalData.id || 'No identification' }}</span>
+        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('boolean') }}</span>): <span class="title">{{ internalData.title || translate('No title') }}</span> | <span class="id">{{ internalData.id || translate('No identification') }}</span>
       </p>
-      <p>{{ internalData.description || 'No description' }}</p>
+      <p>{{ internalData.description || translate('No description') }}</p>
       <FloatingMenu
         :showEdit="true"
         :showAdd="false"
@@ -16,6 +16,7 @@
       v-if="form"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @close="form = false"
       @change="update"
       />
@@ -37,6 +38,10 @@ export default {
     allowChangeName: {
       type: Boolean,
       default: () => true
+    },
+    translate: {
+      type: Function,
+      required: true
     },
     originalObject: {
       type: BooleanType,

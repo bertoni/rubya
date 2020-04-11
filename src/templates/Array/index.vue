@@ -2,10 +2,12 @@
   <div class="child-template array-template">
     <div v-if="!form">
       <p>
-        <span class="name">{{ internalData.name }}</span> (<span class="type">array</span>): <span class="title">{{ internalData.title || 'No title' }}</span> | <span class="id">{{ internalData.id || 'No identification' }}</span>
+        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('array') }}</span>): <span class="title">{{ internalData.title || translate('No title') }}</span> | <span class="id">{{ internalData.id || translate('No identification') }}</span>
       </p>
-      <p>{{ internalData.description || 'No description' }}</p>
-      <p>Additional items: {{ internalData.additionalItems ? 'Yes' : 'No' }}, Unique items: {{ internalData.uniqueItems ? 'Yes' : 'No' }}, Minimum items: {{ showNumber(internalData.minItems) }}, Maximum items: {{ showNumber(internalData.maxItems) }}</p>
+      <p>{{ internalData.description || translate('No description') }}</p>
+      <p>{{ translate('Additional items') }}: {{ internalData.additionalItems ? translate('Yes') : translate('No') }},
+        {{ translate('Unique items') }}: {{ internalData.uniqueItems ? translate('Yes') : translate('No') }},
+        {{ translate('Minimum items') }}: {{ showNumber(internalData.minItems) }}, {{ translate('Maximum items') }}: {{ showNumber(internalData.maxItems) }}</p>
       <FloatingMenu
         :showEdit="true"
         :showAdd="true"
@@ -18,6 +20,7 @@
       v-if="form"
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
+      :translate="translate"
       @close="form = false"
       @change="update"
       />
@@ -25,6 +28,7 @@
       <Child
         :originalObject="internalData.items"
         :allowChangeName="false"
+        :translate="translate"
         @remove-me="removeChild"
         @change="childUpdated"
         />
@@ -34,6 +38,7 @@
         <Child
           :originalObject="item"
           :allowChangeName="false"
+          :translate="translate"
           @remove-me="removeChild"
           @change="childUpdated"
           />
@@ -43,6 +48,7 @@
       v-show="newchild"
       ref="formNewChild"
       :allowChangeName="false"
+      :translate="translate"
       @close="newchild = false"
       @save="addChild"
       />
@@ -68,6 +74,10 @@ export default {
     allowChangeName: {
       type: Boolean,
       default: () => true
+    },
+    translate: {
+      type: Function,
+      required: true
     },
     originalObject: {
       type: ArrayType,

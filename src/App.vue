@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <a @click.prevent="printSchema" href="#">Gerar Json Schema</a>
+    <a @click.prevent="printSchema" href="#">Generate Json Schema</a>
     <Rubya
       ref="Rubya"
       :schema="schema"
+      :language="language"
+      :i18n="i18n"
       @updated-schema="updatedSchema"
       />
   </div>
@@ -71,6 +73,10 @@ export default {
             }
           }
         }
+      },
+      language: 'pt-br',
+      i18n: {
+        'object': 'objeto!'
       }
     }
   },

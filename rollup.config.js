@@ -24,7 +24,10 @@ export default {
       compileTemplate: true
     }),
     babel({
-      runtimeHelpers: true
+      runtimeHelpers: true,
+      plugins: [
+        ["inline-json-import", {}]
+      ]
     }),
     buble({ objectAssign: true })
   ]
