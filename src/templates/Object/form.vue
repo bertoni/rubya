@@ -7,18 +7,6 @@
         <input type="text" name="name" id="name" v-model="internalData.name" :class="(fieldsWithError.name ? 'error' : '')" />
       </fieldset>
       <fieldset>
-        <label for="description" class="fieldplaceholder">{{ translate('Description') }}</label>
-        <textarea v-model="internalData.description" name="description" id="description"></textarea>
-      </fieldset>
-      <fieldset>
-        <label for="identification" class="fieldplaceholder">{{ translate('Identification') }}</label>
-        <input type="text" name="identification" id="identification" v-model="internalData.id" />
-      </fieldset>
-      <fieldset>
-        <label for="title" class="fieldplaceholder">{{ translate('Title') }}</label>
-        <input type="text" name="title" id="title" v-model="internalData.title" />
-      </fieldset>
-      <fieldset>
         <label for="additionalProperties" class="fieldplaceholder">{{ translate('Allow additional properties') }}</label>
         <select v-model="internalData.additionalProperties" name="additionalProperties" id="additionalProperties">
           <option :value="true">{{ translate('Yes') }}</option>
@@ -33,13 +21,28 @@
         <label for="maxProperties" class="fieldplaceholder">{{ translate('Maximum Properties') }}</label>
         <input type="number" name="maxProperties" id="maxProperties" v-model.number="internalData.maxProperties" />
       </fieldset>
-      <fieldset v-if="children.length">
+      <fieldset v-if="children.length" class="double">
         <label class="fieldplaceholder">{{ translate('Required Children') }}: </label>
         <div class="options-group">
           <label v-for="(child, key) in children" :key="'child' + key" class="option">
             <input type="checkbox" v-model="requiredChildren" :value="child" /> {{ child }}
           </label>
         </div>
+      </fieldset>
+      <fieldset v-show="!showCommonFields">
+        <button class="show-common-fields" @click.prevent="showCommonFields = true">{{ translate('show common fields') }}</button>
+      </fieldset>
+      <fieldset v-show="showCommonFields">
+        <label for="title" class="fieldplaceholder">{{ translate('Title') }}</label>
+        <input type="text" name="title" id="title" v-model="internalData.title" />
+      </fieldset>
+      <fieldset v-show="showCommonFields">
+        <label for="id" class="fieldplaceholder">{{ translate('Identification') }}</label>
+        <input type="text" name="id" id="id" v-model="internalData.id" />
+      </fieldset>
+      <fieldset v-show="showCommonFields">
+        <label for="description" class="fieldplaceholder">{{ translate('Description') }}</label>
+        <textarea name="description" id="description" v-model="internalData.description"></textarea>
       </fieldset>
     </form>
     <div class="control-form">
@@ -75,7 +78,8 @@ export default {
       },
       internalData: {},
       children: [],
-      requiredChildren: []
+      requiredChildren: [],
+      showCommonFields: false
     }
   },
   methods: {
