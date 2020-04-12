@@ -9,12 +9,16 @@
         {{ translate('Unique items') }}: {{ internalData.uniqueItems ? translate('Yes') : translate('No') }},
         {{ translate('Minimum items') }}: {{ showNumber(internalData.minItems) }}, {{ translate('Maximum items') }}: {{ showNumber(internalData.maxItems) }}</p>
       <FloatingMenu
+        :translate="translate"
         :showEdit="true"
         :showAdd="true"
         :showRemove="true"
+        :showOpenHideChildren="haveChildren && true"
+        :openedChildren="openedChildren"
         @edit="edit"
         @add="newChild"
-        @remove="remove" />
+        @remove="remove"
+        @open-hide-children="openedChildren = !openedChildren" />
     </div>
     <ArrayForm
       v-if="form"
@@ -24,7 +28,8 @@
       @close="form = false"
       @change="update"
       />
-    <ul class="children unique" v-if="hasListItems === 'object'">
+    <span v-if="haveChildren" v-show="!openedChildren" class="colapsed-children"></span>
+    <ul class="children unique" v-if="openedChildren && hasListItems === 'object'">
       <Child
         :originalObject="internalData.items"
         :allowChangeName="false"
@@ -33,7 +38,7 @@
         @change="childUpdated"
         />
     </ul>
-    <ul class="children multiple" v-if="hasListItems === 'array'">
+    <ul class="children multiple" v-if="openedChildren && hasListItems === 'array'">
       <li v-for="(item, idx) in internalData.items" :key="item.name + '-' + idx">
         <Child
           :originalObject="item"
@@ -88,10 +93,15 @@ export default {
     return {
       form: false,
       newchild: false,
+      openedChildren: true,
       internalData: {}
     }
   },
   computed: {
+    haveChildren () {
+      return !!((!Array.isArray(this.internalData.items) && this.internalData.items && Object.keys(this.internalData.items).length) ||
+        (Array.isArray(this.internalData.items) && this.internalData.items.length))
+    },
     hasListItems: function () {
       if (!Array.isArray(this.internalData.items) && this.internalData.items && Object.keys(this.internalData.items).length) return 'object'
       if (Array.isArray(this.internalData.items) && this.internalData.items.length) return 'array'

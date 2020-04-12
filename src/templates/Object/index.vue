@@ -9,12 +9,16 @@
         {{ translate('Minimum properties') }}: {{ showNumber(internalData.minProperties) }}, {{ translate('Maximum properties') }}: {{ showNumber(internalData.maxProperties) }},
         {{ translate('Required children') }}: {{ internalData.required || '-' }}</p>
       <FloatingMenu
+        :translate="translate"
         :showEdit="true"
         :showAdd="true"
         :showRemove="true"
+        :showOpenHideChildren="haveChildren && true"
+        :openedChildren="openedChildren"
         @edit="edit"
         @add="newChild"
-        @remove="remove" />
+        @remove="remove"
+        @open-hide-children="openedChildren = !openedChildren" />
     </div>
     <ObjectForm
       v-if="form"
@@ -24,7 +28,8 @@
       @close="form = false"
       @change="update"
       />
-    <ul class="children">
+    <span v-if="haveChildren" v-show="!openedChildren" class="colapsed-children"></span>
+    <ul v-show="openedChildren" class="children">
       <li v-for="(propertie, idx) in internalData.properties" :key="propertie.name + '-' + idx">
         <Child
           :originalObject="propertie"
@@ -78,7 +83,13 @@ export default {
     return {
       form: false,
       newchild: false,
+      openedChildren: true,
       internalData: {}
+    }
+  },
+  computed: {
+    haveChildren () {
+      return this.internalData.properties && this.internalData.properties.length > 0
     }
   },
   methods: {

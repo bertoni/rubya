@@ -9,6 +9,7 @@
         {{ translate('Minimum') }}: {{ showNumber(internalData.exclusiveMinimum) }}, {{ translate('Maximum or equal') }}: {{ showNumber(internalData.maximum) }},
         {{ translate('Maximum') }}: {{ showNumber(internalData.exclusiveMaximum) }}</p>
       <FloatingMenu
+        :translate="translate"
         :showEdit="true"
         :showAdd="false"
         :showRemove="true"

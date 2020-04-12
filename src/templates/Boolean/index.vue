@@ -6,6 +6,7 @@
       </p>
       <p>{{ internalData.description || translate('No description') }}</p>
       <FloatingMenu
+        :translate="translate"
         :showEdit="true"
         :showAdd="false"
         :showRemove="true"

@@ -55,5 +55,11 @@
   "A regular expression": "Expressão regular",
   "Allow additional properties": "Permite propriedades adicionais",
   "Minimum Properties": "Mínimo de propriedades",
-  "Maximum Properties": "Máximo de propriedades"
+  "Maximum Properties": "Máximo de propriedades",
+  "Open menu": "Abrir menu",
+  "Edit field": "Editar campo",
+  "Create child": "Criar campo filho",
+  "Remove field": "Remover campo",
+  "Hide children": "Esconder campos filhos",
+  "Open children": "Abrir campos filhos"
 }

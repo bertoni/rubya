@@ -1,11 +1,13 @@
 <template>
   <div class="actions">
-    <button class="main"><label></label></button>
+    <button :title="translate('Open menu')" class="main"><label></label></button>
     <ul>
-      <li v-if="showEdit" @click.prevent="edit"><button class="edit"><label></label></button></li>
-      <li v-if="showAdd" @click.prevent="add"><button class="new"><label></label></button></li>
-      <li v-if="showRemove" @click.prevent="remove"><button class="remove"><label></label></button></li>
+      <li v-if="showEdit" @click.prevent="edit"><button :title="translate('Edit field')" class="edit"><label></label></button></li>
+      <li v-if="showAdd" @click.prevent="add"><button :title="translate('Create child')" class="new"><label></label></button></li>
+      <li v-if="showRemove" @click.prevent="remove"><button :title="translate('Remove field')" class="remove"><label></label></button></li>
     </ul>
+    <button v-if="showOpenHideChildren && openedChildren" :title="translate('Hide children')" class="hide-children" @click.prevent="openHideChildren"><label></label></button>
+    <button v-if="showOpenHideChildren && !openedChildren" :title="translate('Open children')" class="open-children" @click.prevent="openHideChildren"><label></label></button>
   </div>
 </template>
 
@@ -13,6 +15,10 @@
 export default {
   name: 'FloatingMenu',
   props: {
+    translate: {
+      type: Function,
+      required: true
+    },
     showEdit: {
       type: Boolean,
       default: () => true
@@ -22,6 +28,14 @@ export default {
       default: () => true
     },
     showRemove: {
+      type: Boolean,
+      default: () => true
+    },
+    showOpenHideChildren: {
+      type: Boolean,
+      default: () => false
+    },
+    openedChildren: {
       type: Boolean,
       default: () => true
     }
@@ -35,6 +49,9 @@ export default {
     },
     remove () {
       this.$emit('remove')
+    },
+    openHideChildren () {
+      this.$emit('open-hide-children')
     }
   }
 }
@@ -59,7 +76,9 @@ export default {
   border: none;
   color: white;
 }
-.actions button.main {
+.actions button.main,
+.actions button.hide-children,
+.actions button.open-children {
   position: absolute;
   left: 0;
   top: 0;
@@ -68,7 +87,11 @@ export default {
   transition: .2s ease-out;
   z-index: 2;
 }
-.actions button.main label {
+.actions button.hide-children,
+.actions button.open-children { top: 42px; }
+.actions button.main label,
+.actions button.hide-children label,
+.actions button.open-children label {
   cursor: pointer;
   display: block;
   width: 24px;
@@ -79,6 +102,8 @@ export default {
   background-position: center center;
   background-repeat: no-repeat;
 }
+.actions button.hide-children label { background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNmZmYiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMiIgaWQ9IkxheWVyXzIiPjxwYXRoIGQ9Ik0xNiwyOUExMywxMywwLDEsMSwyOSwxNiwxMywxMywwLDAsMSwxNiwyOVpNMTYsNUExMSwxMSwwLDEsMCwyNywxNiwxMSwxMSwwLDAsMCwxNiw1WiIvPjxwYXRoIGQ9Ik0yMiwxN0gxMGExLDEsMCwwLDEsMC0ySDIyYTEsMSwwLDAsMSwwLDJaIi8+PC9nPjxnIGlkPSJmcmFtZSI+PHJlY3QgY2xhc3M9ImNscy0xIiBoZWlnaHQ9IjMyIiB3aWR0aD0iMzIiLz48L2c+PC9zdmc+); }
+.actions button.open-children label { background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNmZmYiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMiIgaWQ9IkxheWVyXzIiPjxwYXRoIGQ9Ik0xNiwyOUExMywxMywwLDEsMSwyOSwxNiwxMywxMywwLDAsMSwxNiwyOVpNMTYsNUExMSwxMSwwLDEsMCwyNywxNiwxMSwxMSwwLDAsMCwxNiw1WiIvPjxwYXRoIGQ9Ik0xNiwyM2ExLDEsMCwwLDEtMS0xVjEwYTEsMSwwLDAsMSwyLDBWMjJBMSwxLDAsMCwxLDE2LDIzWiIvPjxwYXRoIGQ9Ik0yMiwxN0gxMGExLDEsMCwwLDEsMC0ySDIyYTEsMSwwLDAsMSwwLDJaIi8+PC9nPjxnIGlkPSJmcmFtZSI+PHJlY3QgY2xhc3M9ImNscy0xIiBoZWlnaHQ9IjMyIiB3aWR0aD0iMzIiLz48L2c+PC9zdmc+); }
 .actions ul {
   position: absolute;
   display: flex;
