@@ -196,6 +196,15 @@ export default {
 .control-form button.cancel:hover {
   background-color: #9e9898;
 }
+.colapsed-children {
+  display: block;
+  width: 100%;
+  height: 20px;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMzIgMzIiIGlkPSJHbHlwaCIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMzIgMzIiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik0xNiwxM2MtMS42NTQsMC0zLDEuMzQ2LTMsM3MxLjM0NiwzLDMsM3MzLTEuMzQ2LDMtM1MxNy42NTQsMTMsMTYsMTN6IiBpZD0iWE1MSURfMjg3XyIvPjxwYXRoIGQ9Ik02LDEzYy0xLjY1NCwwLTMsMS4zNDYtMywzczEuMzQ2LDMsMywzczMtMS4zNDYsMy0zUzcuNjU0LDEzLDYsMTN6IiBpZD0iWE1MSURfMjg5XyIvPjxwYXRoIGQ9Ik0yNiwxM2MtMS42NTQsMC0zLDEuMzQ2LTMsM3MxLjM0NiwzLDMsM3MzLTEuMzQ2LDMtM1MyNy42NTQsMTMsMjYsMTN6IiBpZD0iWE1MSURfMjkxXyIvPjwvc3ZnPg==);
+  background-repeat: no-repeat;
+  background-position: 30% center;
+  filter: opacity(0.5);
+}
 
 @media screen and (max-width: 1024px) {
   .form-object fieldset {

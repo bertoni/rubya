@@ -182,7 +182,7 @@ Every field has two options:
 For the fields types object and array, have more one option:
 * New: enable you add new child for this fields
 
-Child fields will always be identified after their parents
+Child fields will always be identified after their parents and can be collapsed.
 
 
 ## Test your project with Jest

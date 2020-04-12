@@ -8,6 +8,7 @@
       <p>{{ translate('Minimum length') }}: {{ showNumber(internalData.minLength) }}, {{ translate('Maximum length') }}: {{ showNumber(internalData.maxLength) }},
         {{ translate('Pattern') }}: {{ internalData.pattern || '-' }}, {{ translate('Format') }}: {{ internalData.format || '-' }}</p>
       <FloatingMenu
+        :translate="translate"
         :showEdit="true"
         :showAdd="false"
         :showRemove="true"
