@@ -1,6 +1,6 @@
 {
   "name": "rubya",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Project destined to create json schema of visual form in vue.js",
   "main": "dist/rubya.esm.js",
   "_main": "dist/rubya.umd.js",

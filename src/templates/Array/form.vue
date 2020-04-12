@@ -7,18 +7,6 @@
         <input type="text" name="name" id="name" v-model="internalData.name" :class="(fieldsWithError.name ? 'error' : '')" />
       </fieldset>
       <fieldset>
-        <label for="description" class="fieldplaceholder">{{ translate('Description') }}</label>
-        <textarea name="description" id="description" v-model="internalData.description"></textarea>
-      </fieldset>
-      <fieldset>
-        <label for="id" class="fieldplaceholder">{{ translate('Identification') }}</label>
-        <input type="text" name="id" id="id" v-model="internalData.id" />
-      </fieldset>
-      <fieldset>
-        <label for="title" class="fieldplaceholder">{{ translate('Title') }}</label>
-        <input type="text" name="title" id="title" v-model="internalData.title" />
-      </fieldset>
-      <fieldset>
         <label for="additionalItems" class="fieldplaceholder">{{ translate('Allow additional items') }}</label>
         <select name="additionalItems" id="additionalItems" v-model="internalData.additionalItems">
           <option :value="true">{{ translate('Yes') }}</option>
@@ -39,6 +27,21 @@
       <fieldset>
         <label for="maxItems" class="fieldplaceholder">{{ translate('Maximum items') }}</label>
         <input type="number" name="maxItems" id="maxItems" v-model.number="internalData.maxItems" />
+      </fieldset>
+      <fieldset v-show="!showCommonFields">
+        <button class="show-common-fields" @click.prevent="showCommonFields = true">{{ translate('show common fields') }}</button>
+      </fieldset>
+      <fieldset v-show="showCommonFields">
+        <label for="title" class="fieldplaceholder">{{ translate('Title') }}</label>
+        <input type="text" name="title" id="title" v-model="internalData.title" />
+      </fieldset>
+      <fieldset v-show="showCommonFields">
+        <label for="id" class="fieldplaceholder">{{ translate('Identification') }}</label>
+        <input type="text" name="id" id="id" v-model="internalData.id" />
+      </fieldset>
+      <fieldset v-show="showCommonFields">
+        <label for="description" class="fieldplaceholder">{{ translate('Description') }}</label>
+        <textarea name="description" id="description" v-model="internalData.description"></textarea>
       </fieldset>
     </form>
     <div class="control-form">
@@ -72,7 +75,8 @@ export default {
       fieldsWithError: {
         name: false
       },
-      internalData: {}
+      internalData: {},
+      showCommonFields: false
     }
   },
   methods: {

@@ -129,6 +129,7 @@ export default {
   border: 0;
   align-items: center;
 }
+.form-object fieldset.double { min-width: 65.1%; max-width: 65.1%; }
 .form-object fieldset label.fieldplaceholder {
   margin-bottom: 2px;
   font-size: 0.8em;
@@ -168,6 +169,18 @@ export default {
 .form-object fieldset select.error,
 .form-object fieldset textarea.error {
   border-color: red;
+}
+.form-object button.show-common-fields {
+  margin: 16px 0 0;
+  padding: 6px 10px;
+  border: 0;
+  color: #fff;
+  background-color: #c1c1c1;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.form-object button.show-common-fields:hover {
+  background-color: #9e9898;
 }
 
 .control-form {
@@ -210,6 +223,11 @@ export default {
   .form-object fieldset {
     min-width: 48.5%;
     max-width: 48.5%;
+  }
+  .form-object fieldset.double {
+    min-width: 99%;
+    max-width: 99%;
+    margin: 3px 0;
   }
 }
 @media screen and (max-width: 769px) {
