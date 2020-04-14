@@ -106,6 +106,7 @@ export default {
     },
     addChild (child) {
       this.internalData.properties.push(child)
+      this.$emit('change', this.internalData)
     },
     newChild () {
       this.newchild = true
@@ -120,15 +121,22 @@ export default {
     removeChild (removedChild) {
       this.internalData.properties = this.internalData.properties.filter(child => child.name !== removedChild.name)
       this.internalData.required = this.internalData.required.filter(child => child !== removedChild.name)
+      this.$emit('change', this.internalData)
     },
     remove () {
       this.$emit('remove-me', this.internalData)
     },
     childUpdated (objectType) {
       this.internalData.properties = this.internalData.properties.map(child => {
-        if (child.name === objectType.name) return objectType
+        if (child.name === objectType.old.name) return objectType.new
         return child
       })
+      this.$emit('change', this.internalData)
+    }
+  },
+  watch: {
+    originalObject (val) {
+      this.internalData = this.originalObject
     }
   },
   mounted () {

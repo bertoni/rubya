@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { shallowMount } from '@vue/test-utils'
 import ObjectType from '@/DataStructure/ObjectType.js'
 import BooleanType from '@/DataStructure/BooleanType.js'
@@ -6,6 +7,8 @@ import IntegerType from '@/DataStructure/IntegerType.js'
 import StringType from '@/DataStructure/StringType.js'
 import ArrayType from '@/DataStructure/ArrayType.js'
 import ObjectTemplate from '@/templates/Object/index.vue'
+
+Vue.config.silent = true
 
 let wrapper
 const name = 'field'
@@ -301,7 +304,7 @@ describe('ObjectTemplate.vue', () => {
         translate: text => text
       }
     })
-    wrapper.vm.addChild(new ObjectType({
+    const oldObj = new ObjectType({
       title: 'Other Object field',
       id: '#otherfield',
       description: 'Some description',
@@ -309,7 +312,8 @@ describe('ObjectTemplate.vue', () => {
       additionalProperties: true,
       minProperties: 5,
       maxProperties: 6
-    }, 'foo'))
+    }, 'foo')
+    wrapper.vm.addChild(oldObj)
     wrapper.vm.addChild(new ObjectType({
       title: 'Other Object field',
       id: '#otherfield',
@@ -319,17 +323,38 @@ describe('ObjectTemplate.vue', () => {
       minProperties: 1,
       maxProperties: 2
     }, 'baa'))
-    wrapper.vm.childUpdated(new ObjectType({
-      title: 'Other Object field',
-      id: '#otherfield',
-      description: 'Some description',
-      required: [],
-      additionalProperties: false,
-      minProperties: 10,
-      maxProperties: 15
-    }, 'foo'))
+    wrapper.vm.childUpdated({ old: oldObj, new: new ObjectType({
+        title: 'Other Object field',
+        id: '#otherfield',
+        description: 'Some description',
+        required: [],
+        additionalProperties: false,
+        minProperties: 10,
+        maxProperties: 15
+      }, 'foo') })
     expect(wrapper.vm.internalData.properties[0].additionalProperties).toBe(false)
     expect(wrapper.vm.internalData.properties[0].minProperties).toBe(10)
     expect(wrapper.vm.internalData.properties[0].maxProperties).toBe(15)
+  })
+
+  it('should change internalData when change originalObject', () => {
+    let oriObj = new ObjectType(structure, name)
+    wrapper = shallowMount(ObjectTemplate, {
+      propsData: {
+        allowChangeName: true,
+        originalObject: oriObj,
+        translate: text => text
+      }
+    })
+    expect(wrapper.vm.internalData.properties.length).toBe(0)
+    oriObj = new ObjectType(structure, name)
+    let stringStructure = {
+      title: 'New String field',
+      id: '#newfield',
+      description: 'Some new description'
+    }
+    oriObj.properties.push(new StringType(stringStructure))
+    wrapper.vm.originalObject = oriObj
+    expect(wrapper.vm.internalData.properties.length).toBe(1)
   })
 })
