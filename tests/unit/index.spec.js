@@ -1,8 +1,10 @@
+import Vue from 'vue'
 import { shallowMount } from '@vue/test-utils'
 import ObjectType from '@/DataStructure/ObjectType.js'
 import BooleanType from '@/DataStructure/BooleanType.js'
 import Rubya from '@/index.vue'
 
+Vue.config.silent = true
 let wrapper
 
 describe('index.vue', () => {
@@ -143,5 +145,37 @@ describe('index.vue', () => {
     })
     expect(wrapper.vm.translate('number')).toBe('número')
     expect(wrapper.vm.translate('texto')).toBe('perfect!')
+  })
+
+  it('should change tree when change schema', () => {
+    let oriSchema = {
+      '$schema': 'http://json-schema.org/draft-07/schema#',
+      '$id': 'http://example.com/product.schema.json',
+      'title': 'Object root',
+      'description': 'Some description',
+      'type': 'object',
+      'properties': {},
+      'required': []
+    }
+    wrapper = shallowMount(Rubya, {
+      propsData: {
+        schema: oriSchema
+      }
+    })
+    expect(wrapper.vm.tree.properties.length).toBe(0)
+    wrapper.vm.schema = {
+      '$schema': 'http://json-schema.org/draft-07/schema#',
+      '$id': 'http://example.com/product.schema.json',
+      'title': 'Object root',
+      'description': 'Some description',
+      'type': 'object',
+      'properties': {
+        'xpto': {
+          'type': 'string'
+        }
+      },
+      'required': []
+    }
+    expect(wrapper.vm.tree.properties.length).toBe(1)
   })
 })

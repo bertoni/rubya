@@ -486,11 +486,11 @@ describe('ArrayTemplate.vue', () => {
       description: 'Some new description'
     })
     wrapper.vm.addChild(boolean01)
-    wrapper.vm.childUpdated(new BooleanType({
-      title: 'New Boolean field',
-      id: '#changedfield',
-      description: 'Some new description'
-    }))
+    wrapper.vm.childUpdated({ old: boolean01, new: new BooleanType({
+        title: 'New Boolean field',
+        id: '#changedfield',
+        description: 'Some new description'
+      }) })
     expect(wrapper.vm.internalData.items.id).toBe('#changedfield')
   })
 
@@ -507,16 +507,17 @@ describe('ArrayTemplate.vue', () => {
       id: '#onechild',
       description: 'Some new description'
     }))
-    wrapper.vm.addChild(new BooleanType({
+    const oldBool = new BooleanType({
       title: 'New Boolean field',
       id: '#twochild',
       description: 'Some new description'
-    }))
-    wrapper.vm.childUpdated(new BooleanType({
-      title: 'New Boolean field',
-      id: '#changedfield',
-      description: 'Some new description'
-    }, '1'))
+    })
+    wrapper.vm.addChild(oldBool)
+    wrapper.vm.childUpdated({ old: oldBool, new: new BooleanType({
+        title: 'New Boolean field',
+        id: '#changedfield',
+        description: 'Some new description'
+      }, '1') })
     expect(wrapper.vm.internalData.items[1].id).toBe('#changedfield')
   })
 })

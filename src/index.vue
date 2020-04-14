@@ -68,6 +68,11 @@ export default {
       this.generateTreeFromSchema(this.schema)
     }
   },
+  watch: {
+    schema (val) {
+      this.generateTreeFromSchema(val)
+    }
+  },
   mounted () {
     this.generateTreeFromSchema(this.schema)
     if (this.language && this.language.length && i18nOptions[this.language]) this.dataTranslate = i18nOptions[this.language]

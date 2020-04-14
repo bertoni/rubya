@@ -86,8 +86,12 @@ export default {
       this.$emit('remove-me', this.internalData)
     },
     update (newData) {
-      this.internalData = newData
-      this.$emit('change', this.internalData)
+      this.$emit('change', { old: this.internalData, new: newData })
+    }
+  },
+  watch: {
+    originalObject (val) {
+      this.internalData = val
     }
   },
   mounted () {

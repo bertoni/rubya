@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { shallowMount } from '@vue/test-utils'
 import ArrayType from '@/DataStructure/ArrayType.js'
 import BooleanType from '@/DataStructure/BooleanType.js'
@@ -6,6 +7,8 @@ import NumberType from '@/DataStructure/NumberType.js'
 import ObjectType from '@/DataStructure/ObjectType.js'
 import StringType from '@/DataStructure/StringType.js'
 import Child from '@/templates/Child.vue'
+
+Vue.config.silent = true
 
 let wrapper
 let structure = { title: 'Object field' }
@@ -138,10 +141,11 @@ describe('Child.vue', () => {
   })
 
   it('should $emit change in update method', () => {
+    const oriObj = new ObjectType(structure, name)
     wrapper = shallowMount(Child, {
       propsData: {
         allowChangeName: true,
-        originalObject: new ObjectType(structure, name),
+        originalObject: oriObj,
         translate: text => text
       }
     })
@@ -150,6 +154,27 @@ describe('Child.vue', () => {
     const obj = new ObjectType(newStructure, newName)
     wrapper.vm.update(obj)
     expect(typeof wrapper.emitted()).toBe('object')
-    expect(wrapper.emitted()['change'][0][0]).toBe(obj)
+    expect(wrapper.emitted()['change'][0][0]).toStrictEqual({ new: obj, old: oriObj })
+  })
+
+  it('should change internalData when change originalObject', () => {
+    const oriObj = new ObjectType(structure, name)
+    wrapper = shallowMount(Child, {
+      propsData: {
+        allowChangeName: true,
+        originalObject: oriObj,
+        translate: text => text
+      }
+    })
+    expect(wrapper.vm.internalData.properties.length).toBe(0)
+    const newObj = new ObjectType(structure, name)
+    let stringStructure = {
+      title: 'New String field',
+      id: '#newfield',
+      description: 'Some new description'
+    }
+    newObj.properties.push(new StringType(stringStructure))
+    wrapper.vm.originalObject = newObj
+    expect(wrapper.vm.internalData.properties.length).toBe(1)
   })
 })

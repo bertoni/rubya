@@ -124,6 +124,7 @@ export default {
       if (Array.isArray(this.internalData.items) && this.internalData.items.length) {
         child.name = this.internalData.items.length
         this.internalData.items.push(child)
+        this.$emit('change', this.internalData)
         return true
       } else if (Object.keys(this.internalData.items).length) {
         const oldChild = this.internalData.items
@@ -132,9 +133,11 @@ export default {
         this.internalData.items.push(oldChild)
         child.name = this.internalData.items.length.toString()
         this.internalData.items.push(child)
+        this.$emit('change', this.internalData)
         return true
       }
       this.internalData.items = child
+      this.$emit('change', this.internalData)
     },
     newChild () {
       this.newchild = true
@@ -161,18 +164,20 @@ export default {
       } else {
         this.internalData.items = []
       }
+      this.$emit('change', this.internalData)
     },
     childUpdated (objectType) {
       if (Array.isArray(this.internalData.items)) {
         this.internalData.items = this.internalData.items.map(child => {
-          if (child.name === objectType.name) {
-            return objectType
+          if (child.name === objectType.old.name) {
+            return objectType.new
           }
           return child
         })
       } else {
-        this.internalData.items = objectType
+        this.internalData.items = objectType.new
       }
+      this.$emit('change', this.internalData)
     },
     remove () {
       this.$emit('remove-me', this.internalData)
