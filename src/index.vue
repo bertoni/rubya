@@ -1,9 +1,14 @@
 <template>
   <ObjectTemplate
     v-if="tree !== null"
+    :class="[{'without-description': hideDescription}, {'without-rules': hideRules}]"
     :originalObject="tree"
     :allowChangeName="false"
     :translate="translate"
+    :hideTitle="hideTitle"
+    :hideIdentification="hideIdentification"
+    :hideDescription="hideDescription"
+    :hideRules="hideRules"
     @remove-me="removeChild"
     @change="childUpdated"
     />
@@ -20,6 +25,22 @@ export default {
     ObjectTemplate
   },
   props: {
+    hideTitle: {
+      type: Boolean,
+      default: () => false
+    },
+    hideIdentification: {
+      type: Boolean,
+      default: () => false
+    },
+    hideDescription: {
+      type: Boolean,
+      default: () => false
+    },
+    hideRules: {
+      type: Boolean,
+      default: () => false
+    },
     i18n: {
       type: Object,
       required: false,
@@ -108,6 +129,16 @@ export default {
   font-size: 0.9em;
   font-style: italic;
 }
+
+.without-description .child-template { min-height: 36px; }
+.without-description .child-template > div,
+.object-template.without-description > div { padding-top: 7px; }
+.without-description .array-template > div,
+.without-description .object-template > div { margin-bottom: 20px; }
+.without-rules .child-template > div,
+.object-template.without-rules > div { padding-top: 14px; }
+.boolean-template { padding-top: 5px; }
+.without-description .boolean-template > div { padding-top: 14px; }
 
 .form-template {
   margin: 20px 0;

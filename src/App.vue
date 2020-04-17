@@ -1,11 +1,21 @@
 <template>
   <div id="app">
     <a @click.prevent="printSchema" href="#">Generate Json Schema</a>
+    <ul id="control-hide">
+      <li><input name="hideTitle" type="checkbox" v-model="hideTitle" /> Hide title</li>
+      <li><input name="hideIdentification" type="checkbox" v-model="hideIdentification" /> Hide Identification</li>
+      <li><input name="hideDescription" type="checkbox" v-model="hideDescription" /> Hide Description</li>
+      <li><input name="hideRules" type="checkbox" v-model="hideRules" /> Hide Rules</li>
+    </ul>
     <Rubya
       ref="Rubya"
       :schema="schema"
       :language="language"
       :i18n="i18n"
+      :hideTitle="hideTitle"
+      :hideIdentification="hideIdentification"
+      :hideDescription="hideDescription"
+      :hideRules="hideRules"
       @updated-schema="updatedSchema"
       />
   </div>
@@ -77,7 +87,11 @@ export default {
       language: 'pt-br',
       i18n: {
         'object': 'objeto!'
-      }
+      },
+      hideTitle: false,
+      hideIdentification: false,
+      hideDescription: false,
+      hideRules: false
     }
   },
   methods: {
@@ -97,5 +111,12 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+#control-hide {
+  position: fixed;
+  top: 0;
+  right: 0;
+  list-style: none;
+  z-index: 1;
 }
 </style>

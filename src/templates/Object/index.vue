@@ -2,10 +2,11 @@
   <div class="child-template object-template">
     <div v-if="!form">
       <p>
-        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('object') }}</span>): <span class="title">{{ internalData.title || translate('No title') }}</span> | <span class="id">{{ internalData.id || translate('No identification') }}</span>
+        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('object') }}</span>)<span v-if="!hideTitle || !hideIdentification">: </span>
+        <span v-if="!hideTitle" class="title">{{ internalData.title || translate('No title') }}</span> <span v-if="!hideTitle && !hideIdentification">|</span> <span v-if="!hideIdentification" class="id">{{ internalData.id || translate('No identification') }}</span>
       </p>
-      <p>{{ internalData.description || 'No description' }}</p>
-      <p>{{ translate('Additional properties') }}: {{ internalData.additionalProperties ? translate('Yes') : translate('No') }},
+      <p v-if="!hideDescription">{{ internalData.description || 'No description' }}</p>
+      <p v-if="!hideRules">{{ translate('Additional properties') }}: {{ internalData.additionalProperties ? translate('Yes') : translate('No') }},
         {{ translate('Minimum properties') }}: {{ showNumber(internalData.minProperties) }}, {{ translate('Maximum properties') }}: {{ showNumber(internalData.maxProperties) }},
         {{ translate('Required children') }}: {{ internalData.required || '-' }}</p>
       <FloatingMenu
@@ -34,6 +35,10 @@
         <Child
           :originalObject="propertie"
           :translate="translate"
+          :hideTitle="hideTitle"
+          :hideIdentification="hideIdentification"
+          :hideDescription="hideDescription"
+          :hideRules="hideRules"
           @remove-me="removeChild"
           @change="childUpdated"
           />
@@ -66,6 +71,22 @@ export default {
     Child
   },
   props: {
+    hideTitle: {
+      type: Boolean,
+      default: () => false
+    },
+    hideIdentification: {
+      type: Boolean,
+      default: () => false
+    },
+    hideDescription: {
+      type: Boolean,
+      default: () => false
+    },
+    hideRules: {
+      type: Boolean,
+      default: () => false
+    },
     allowChangeName: {
       type: Boolean,
       default: () => true

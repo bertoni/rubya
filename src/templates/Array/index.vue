@@ -2,10 +2,11 @@
   <div class="child-template array-template">
     <div v-if="!form">
       <p>
-        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('array') }}</span>): <span class="title">{{ internalData.title || translate('No title') }}</span> | <span class="id">{{ internalData.id || translate('No identification') }}</span>
+        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('array') }}</span>)<span v-if="!hideTitle || !hideIdentification">: </span>
+        <span v-if="!hideTitle" class="title">{{ internalData.title || translate('No title') }}</span> <span v-if="!hideTitle && !hideIdentification">|</span> <span v-if="!hideIdentification" class="id">{{ internalData.id || translate('No identification') }}</span>
       </p>
-      <p>{{ internalData.description || translate('No description') }}</p>
-      <p>{{ translate('Additional items') }}: {{ internalData.additionalItems ? translate('Yes') : translate('No') }},
+      <p v-if="!hideDescription">{{ internalData.description || 'No description' }}</p>
+      <p v-if="!hideRules">{{ translate('Additional items') }}: {{ internalData.additionalItems ? translate('Yes') : translate('No') }},
         {{ translate('Unique items') }}: {{ internalData.uniqueItems ? translate('Yes') : translate('No') }},
         {{ translate('Minimum items') }}: {{ showNumber(internalData.minItems) }}, {{ translate('Maximum items') }}: {{ showNumber(internalData.maxItems) }}</p>
       <FloatingMenu
@@ -34,6 +35,10 @@
         :originalObject="internalData.items"
         :allowChangeName="false"
         :translate="translate"
+        :hideTitle="hideTitle"
+        :hideIdentification="hideIdentification"
+        :hideDescription="hideDescription"
+        :hideRules="hideRules"
         @remove-me="removeChild"
         @change="childUpdated"
         />
@@ -44,6 +49,10 @@
           :originalObject="item"
           :allowChangeName="false"
           :translate="translate"
+          :hideTitle="hideTitle"
+          :hideIdentification="hideIdentification"
+          :hideDescription="hideDescription"
+          :hideRules="hideRules"
           @remove-me="removeChild"
           @change="childUpdated"
           />
@@ -76,6 +85,22 @@ export default {
     FloatingMenu
   },
   props: {
+    hideTitle: {
+      type: Boolean,
+      default: () => false
+    },
+    hideIdentification: {
+      type: Boolean,
+      default: () => false
+    },
+    hideDescription: {
+      type: Boolean,
+      default: () => false
+    },
+    hideRules: {
+      type: Boolean,
+      default: () => false
+    },
     allowChangeName: {
       type: Boolean,
       default: () => true
