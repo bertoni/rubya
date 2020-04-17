@@ -2,9 +2,10 @@
   <div class="child-template boolean-template">
     <div v-if="!form">
       <p>
-        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('boolean') }}</span>): <span class="title">{{ internalData.title || translate('No title') }}</span> | <span class="id">{{ internalData.id || translate('No identification') }}</span>
+        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('boolean') }}</span>)<span v-if="!hideTitle || !hideIdentification">: </span>
+        <span v-if="!hideTitle" class="title">{{ internalData.title || translate('No title') }}</span> <span v-if="!hideTitle && !hideIdentification">|</span> <span v-if="!hideIdentification" class="id">{{ internalData.id || translate('No identification') }}</span>
       </p>
-      <p>{{ internalData.description || translate('No description') }}</p>
+      <p v-if="!hideDescription">{{ internalData.description || 'No description' }}</p>
       <FloatingMenu
         :translate="translate"
         :showEdit="true"
@@ -18,6 +19,9 @@
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
       :translate="translate"
+      :hideTitle="hideTitle"
+      :hideIdentification="hideIdentification"
+      :hideDescription="hideDescription"
       @close="form = false"
       @change="update"
       />
@@ -36,6 +40,18 @@ export default {
     FloatingMenu
   },
   props: {
+    hideTitle: {
+      type: Boolean,
+      default: () => false
+    },
+    hideIdentification: {
+      type: Boolean,
+      default: () => false
+    },
+    hideDescription: {
+      type: Boolean,
+      default: () => false
+    },
     allowChangeName: {
       type: Boolean,
       default: () => true

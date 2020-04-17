@@ -2,10 +2,11 @@
   <div class="child-template string-template">
     <div v-if="!form">
       <p>
-        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('string') }}</span>): <span class="title">{{ internalData.title || translate('No title') }}</span> | <span class="id">{{ internalData.id || translate('No identification') }}</span>
+        <span class="name">{{ internalData.name }}</span> (<span class="type">{{ translate('string') }}</span>)<span v-if="!hideTitle || !hideIdentification">: </span>
+        <span v-if="!hideTitle" class="title">{{ internalData.title || translate('No title') }}</span> <span v-if="!hideTitle && !hideIdentification">|</span> <span v-if="!hideIdentification" class="id">{{ internalData.id || translate('No identification') }}</span>
       </p>
-      <p>{{ internalData.description || translate('No description') }}</p>
-      <p>{{ translate('Minimum length') }}: {{ showNumber(internalData.minLength) }}, {{ translate('Maximum length') }}: {{ showNumber(internalData.maxLength) }},
+      <p v-if="!hideDescription">{{ internalData.description || 'No description' }}</p>
+      <p v-if="!hideRules">{{ translate('Minimum length') }}: {{ showNumber(internalData.minLength) }}, {{ translate('Maximum length') }}: {{ showNumber(internalData.maxLength) }},
         {{ translate('Pattern') }}: {{ internalData.pattern || '-' }}, {{ translate('Format') }}: {{ internalData.format || '-' }}</p>
       <FloatingMenu
         :translate="translate"
@@ -38,6 +39,22 @@ export default {
     FloatingMenu
   },
   props: {
+    hideTitle: {
+      type: Boolean,
+      default: () => false
+    },
+    hideIdentification: {
+      type: Boolean,
+      default: () => false
+    },
+    hideDescription: {
+      type: Boolean,
+      default: () => false
+    },
+    hideRules: {
+      type: Boolean,
+      default: () => false
+    },
     allowChangeName: {
       type: Boolean,
       default: () => true

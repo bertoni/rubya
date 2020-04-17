@@ -170,6 +170,14 @@ export default {
 
 Obs: You can combine these two options, using one default language and override some text with your translate. The i18n has priority and will override the language specified. If you provide these two, it is not necessary translate all texts, all default language will be used, except your own translate.
 
+
+## Control what you see
+You can control the elements that will be exhibit in the list. You can hidden the `title`, `identification`, `description` and `rules`.
+This will be your list cleaner and shorter.
+
+You can control this using the parameters: `hideTitle`, `hideIdentification`, `hideDescription` and `hideRules`.
+
+
 ## How works
 ![Rubya screen](assets/screen.png "Rubya screen")
 
@@ -184,6 +192,18 @@ For the fields types object and array, have more one option:
 
 Child fields will always be identified after their parents and can be collapsed.
 
+
+## Properties
+
+|Name|Type|Required|Default Value |Info|
+|---|---|---|---|---|
+| schema | Object | No | {} |Your pre-existing schema|
+| language | String | No | - |Language to translate all interface|
+| i18n | Object | No | {} |Your own traduction|
+| hideTitle | Boolean | No | false |Hide the titles in list|
+| hideIdentification | Boolean | No | false |Hide the identifications in list|
+| hideDescription | Boolean | No | false |Hide de descriptions in list|
+| hideRules | Boolean | No | false |Hide de rules in list|
 
 ## Test your project with Jest
 

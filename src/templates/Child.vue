@@ -5,6 +5,10 @@
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
       :translate="translate"
+      :hideTitle="hideTitle"
+      :hideIdentification="hideIdentification"
+      :hideDescription="hideDescription"
+      :hideRules="hideRules"
       @remove-me="remove"
       @change="update"
     />
@@ -13,6 +17,10 @@
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
       :translate="translate"
+      :hideTitle="hideTitle"
+      :hideIdentification="hideIdentification"
+      :hideDescription="hideDescription"
+      :hideRules="hideRules"
       @remove-me="remove"
       @change="update"
     />
@@ -21,6 +29,10 @@
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
       :translate="translate"
+      :hideTitle="hideTitle"
+      :hideIdentification="hideIdentification"
+      :hideDescription="hideDescription"
+      :hideRules="hideRules"
       @remove-me="remove"
       @change="update"
     />
@@ -29,6 +41,10 @@
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
       :translate="translate"
+      :hideTitle="hideTitle"
+      :hideIdentification="hideIdentification"
+      :hideDescription="hideDescription"
+      :hideRules="hideRules"
       @remove-me="remove"
       @change="update"
     />
@@ -37,6 +53,10 @@
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
       :translate="translate"
+      :hideTitle="hideTitle"
+      :hideIdentification="hideIdentification"
+      :hideDescription="hideDescription"
+      :hideRules="hideRules"
       @remove-me="remove"
       @change="update"
     />
@@ -45,6 +65,9 @@
       :originalObject="internalData"
       :allowChangeName="allowChangeName"
       :translate="translate"
+      :hideTitle="hideTitle"
+      :hideIdentification="hideIdentification"
+      :hideDescription="hideDescription"
       @remove-me="remove"
       @change="update"
     />
@@ -63,6 +86,22 @@ export default {
     StringTemplate: () => import('./String/index.vue')
   },
   props: {
+    hideTitle: {
+      type: Boolean,
+      default: () => false
+    },
+    hideIdentification: {
+      type: Boolean,
+      default: () => false
+    },
+    hideDescription: {
+      type: Boolean,
+      default: () => false
+    },
+    hideRules: {
+      type: Boolean,
+      default: () => false
+    },
     allowChangeName: {
       type: Boolean,
       default: () => true
